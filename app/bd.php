@@ -1,7 +1,7 @@
 <?php
 
 // Conectar a la base de datos
-$conexion = mysqli_connect('localhost', 'root', '', 'viroco');
+$conexion = mysqli_connect('localhost', 'root', '', 'ali3d');
 
 // Chequear la conexión
 if (mysqli_connect_errno()) {

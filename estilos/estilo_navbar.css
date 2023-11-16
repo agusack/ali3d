@@ -1,5 +1,14 @@
+:root {
+  --azul_1: #0090E8;
+  --azul_2: #69A7EE;
+  --azul_3: #B0CCF6;
+  --azul_4: #ECF2FD;
+  --negro: #2F2F2F;
+  --blanco: #FFFFFF;
+}
+
 nav {
-  background-color: #f4f4f4;
+  background-color: var(--azul_3);
   height: 4rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -35,16 +44,16 @@ nav a:hover {
   width: 30%;
   display: flex;
   align-items: center;
-
+  padding-left: 10%;
 }
 
 #logo img {
-  width: 50%;
+  height: 6rem;
   filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.3));
 }
 
 .ajuste_img {
-  width: 100%;
+  width: 6rem;
 }
 
 /* buscador */
@@ -59,13 +68,12 @@ nav a:hover {
 .buscador {
   height: 2.5rem; /* medida relativa */
   width: 85%;
-  background-color: #ffffff;
+  background-color: var(--blanco);
   border-radius: 30px;
   display: flex;
   align-items: center;
   padding-left: 1rem;
-  border: 1px solid #255a66;
-  box-shadow: 0rem 0.3rem 0rem #255a66;
+  box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.3);
 }
 
 input {
@@ -85,7 +93,7 @@ button {
   cursor: pointer;
   background-color: transparent;
   transition: background-color 0.3s ease;
-  color: black;
+  color: var(--blanco);
   font-size: 1rem;
 }
 
@@ -97,18 +105,16 @@ button {
 }
 
 #carrito {
-  width: auto;
   display: flex;
   justify-content: flex-end;
-  background-color: #FCC9BD;
+  background-color: var(--azul_1);
   margin-right: 2rem;
 }
 
 #user {
-  width: auto;
   display: flex;
   justify-content: center;
-  background-color: #7fd4dd;
+  background-color: var(--azul_1);
 }
 
 #subnav {
@@ -119,28 +125,26 @@ button {
   align-items: center;
   padding-left: 15%;
   padding-right: 15%;
-  background-color: #f4f4f4;
-  border-bottom: solid 1px #255a66;
+  background-color: var(--azul_3);
 }
 
 .button_nav {
-  border: 1px solid #255a66;
-  border-radius: .5rem;
+  height: 7rem;
+  width: 7rem;
   padding: .2rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  box-shadow: 0rem 0.6rem 0rem #255a66;
   transition: all .1s;
+  border-radius: 50%;
  }
  
  .button_nav:active {
-  box-shadow: 0rem 0.2rem 0rem #255a66;
   position: relative;
   top: 0.2rem;
  }
 
  .button_subnav {
-  background-color: #f4f4f4;
+  background-color: var(--azul_3);
   border-radius: .5rem;
   padding: .1rem;
   padding-left: 1rem;
@@ -157,13 +161,13 @@ button {
 
 #subnav > div > a {
   height: auto;
-  color: #255a66;
+  color: var(--negro);
   font-weight: bold;
   font-size: 1.3rem;
 }
 
 #subnav > div > a:hover {
-  color: #ED82AD;
+  color: var(--blanco);
 }
 
 #menuCategorias {
@@ -185,7 +189,7 @@ button {
   top: 100%;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  background-color: #f4f4f4;
+  background-color: var(--azul_3);
   z-index: 20;
 }
 
@@ -205,13 +209,13 @@ button {
   margin: 0;
   font-size: 1.4rem;
   text-decoration: none;
-  color: #255a66;
+  color: var(--negro);
   transition: all 0.2s ease;
 }
 
 .menu-categorias a:hover {
-  color: #ED82AD;
-  text-decoration-color: #ED82AD;
+  color: var(--blanco);
+  text-decoration-color: var(--blanco)
 }
 
 .categoria-principal {
@@ -223,7 +227,7 @@ button {
   margin: 0;
   padding-left: 1.2rem;
   text-align: left;
-  color: #255a66;
+  color: var(--negro);
   font-weight: bold;
   text-decoration: underline;
 }
@@ -251,7 +255,7 @@ button {
 
 .subcategorias li a {
   font-size: 1.2rem;
-  color: #255a66;
+  color: var(--negro);
 }
 
 #menu-usuario {
@@ -260,7 +264,7 @@ button {
   top: 0%;
   right: 0;
   padding: 0.5rem;
-  background-color: #7fd4dd;
+  background-color: var(--azul_1);
   border: 1px solid #255a66;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   z-index: 999;
@@ -274,8 +278,8 @@ button {
 }
 
 #menu-usuario a:hover {
-  background-color: #255a66;
-  color: #7fd4dd;
+  background-color: var(--blanco);
+  color: var(--negro);
 }
 
 @media screen and (max-width: 768px) { 

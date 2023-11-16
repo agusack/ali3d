@@ -86,37 +86,37 @@
 <div id="navbar">
 <nav>
   <div id="conteiner_nav">
-    <div id="logo"><img src="/Viroco/img/logos/viroco.png" class="ajuste_img" alt="Viroco Regaleria"></div>
+    <div id="logo"><img src="/ali3d/img/logos/ali3d.png" class="ajuste_img" alt="ALI3D Objetos 3D y stickers"></div>
       <div id="conteiner_buscador">
         <div class="buscador">
-          <form action="/Viroco/app/tienda.php" method="post">
+          <form action="/ali3d/app/tienda.php" method="post">
             <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
             <input type="text" id="buscar" name="buscar" placeholder="Buscar">
           </form>
         </div>
       </div>
     <div id="conteiner_user">
-      <div id="carrito" class="button_nav"><a href="/Viroco/app/carrito.php"><i class="fas fa-shopping-cart" id="carrito-icono"></i> (<?php echo $cantidad_total; ?>)</a></div>
+      <div id="carrito" class="button_nav"><a href="/ali3d/app/carrito.php"><i class="fas fa-shopping-cart" id="carrito-icono"></i> (<?php echo $cantidad_total; ?>)</a></div>
       <!-- HTML existente -->
       <div id="user" class="button_nav" style="position: relative;">
         <?php
           // Verificar si la sesión está iniciada
           if(isset($_SESSION['username'])) {
             // Mostrar mensaje personalizado con el nombre de usuario
-            echo '<a href="#" class="username">Hola '.$_SESSION['username'].'!</a>';
+            echo '<a href="#" class="username"><i class="fa-solid fa-user"></i></a>';
           } else {
             // Mostrar enlace "Iniciar sesión"
-            echo '<a href="/Viroco/app/iniciar_sesion.php">Iniciar sesión</a>';
+            echo '<a href="/ali3d/app/iniciar_sesion.php"><i class="fa-solid fa-user"></i></a>';
           }
         ?>
         <div id="menu-usuario" style="display: none; position: absolute; top: 100%; right: 0; width: 20rem;">
         <?php
           // Mostrar botón de panel de administración solo si el usuario es un administrador
           if(isset($_SESSION['is_admin']) && ($_SESSION['is_admin'] > 0)) {
-            echo '<a href="/Viroco/admin/admin_panel.php">Panel de Administración</a>';
+            echo '<a href="/ali3d/admin/admin_panel.php">Panel de Administración</a>';
           }
         ?>
-        <a href="/Viroco/app/cerrar_sesion.php">Cerrar sesión</a>
+        <a href="/ali3d/app/cerrar_sesion.php">Cerrar sesión</a>
         </div>
         </div>
     </div>
@@ -124,7 +124,7 @@
 </nav>
 <div id="subnav">
     <div>
-      <a href="/Viroco/index.php" class="button_subnav">Inicio</a>
+      <a href="/ali3d/index.php" class="button_subnav">Inicio</a>
     </div>
     <div id="menuCategorias" class="menu">
       <a class="button_subnav">Categorías</a>
@@ -133,14 +133,14 @@
         <?php foreach ($categorias as $categoria) : ?>
           <div class="categoria-principal">
             <p>
-              <a href="/Viroco/app/tienda.php?categoria=<?php echo $categoria['id']; ?>">
+              <a href="/ali3d/app/tienda.php?categoria=<?php echo $categoria['id']; ?>">
                 <?php echo $categoria['nombre']; ?>
               </a>
             </p>
             <ul class="subcategorias">
               <?php foreach ($categoria['subcategorias'] as $subcategoria) : ?>
                 <li>
-                  <a href="/Viroco/app/tienda.php?categoria=<?php echo $categoria['id']; ?>&subcategoria=<?php echo $subcategoria['id']; ?>">
+                  <a href="/ali3d/app/tienda.php?categoria=<?php echo $categoria['id']; ?>&subcategoria=<?php echo $subcategoria['id']; ?>">
                     <?php echo $subcategoria['nombre']; ?>
                   </a>
                   <?php if (!empty($subcategoria['productos'])): ?>

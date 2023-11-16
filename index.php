@@ -11,7 +11,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Viroco</title>
+  <title>ALI3D</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -26,35 +26,8 @@
     include('app/navbar.php');
   ?>
   <section id="page">
-  <!-- Sección del slider con imágenes -->
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicadores del slider -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-    <!-- Imágenes del slider -->
-    <div class="carousel-inner">
-      <div class="item active">
-        <img src="img/banner/banner.png" alt="Slide 1" class="slider-img">
-      </div>
-      <div class="item">
-        <img src="img/banner/banner.png" alt="Slide 2" class="slider-img">
-      </div>
-      <div class="item">
-        <img src="img/banner/banner.png" alt="Slide 3" class="slider-img">
-      </div>
-    </div>
-    <!-- Controles del slider -->
-    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left"></span>
-      <span class="sr-only">Anterior</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right"></span>
-      <span class="sr-only">Siguiente</span>
-    </a>
+  <div id="hero">
+    
   </div>
   <section id="conteiner_index">
   <!-- Sección de productos populares -->
@@ -87,6 +60,18 @@
     </div>
   </div>
 
+  <div id="secciones" class="parent">
+        <div id="seccion_3d" class="div1">
+          <div><p>Visita nuestra sección <br>3D</p></div>
+        </div>
+        <div id="seccion_sticker" class="div2">
+          <div><p>Visita nuestra sección <br>Stickers</p></div>
+        </div>
+        <div id="seccion_contacto" class="div3">
+          <div><p>¿Tenés una idea? contactate con nosotros</p></div>
+        </div>
+  </div>
+
   <!-- Sección de productos nuevos -->
   <div class="new-products">
     <h2><i class="fa-solid fa-fire fa-bounce"></i>Productos nuevos</h2>
@@ -117,16 +102,6 @@
       mysqli_close($conexion);
       ?>
     </div>
-  </div>
-
-  <!-- Sección con botón para ir a la tienda y botones para compartir en redes sociales -->
-  <div id="go-to-store-btn">
-    <a href="app/tienda.php" class="ir_tienda"><i class="fa-solid fa-cart-shopping fa-beat"></i>Todos los productos</a>
-  </div>
-  <div id="share-buttons">
-    <button class="btn"><i class="fa-brands fa-instagram"></i></button>
-    <button class="btn"><i class="fa-brands fa-tiktok"></i></button>
-    <button class="btn"><i class="fa fa-facebook"></i></button>
   </div>
   </section>
   <?php

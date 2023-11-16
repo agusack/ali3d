@@ -1,6 +1,6 @@
 <?php
 
-define('URL_PRINCIPAL', '/Viroco/index.php');
+define('URL_PRINCIPAL', '/ali3d/index.php');
 
 // Inicia la sesión.
 session_start();

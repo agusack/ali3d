@@ -1,7 +1,7 @@
 <?php
 // Datos de conexión a la base de datos.
 $host = 'localhost';
-$dbname = 'viroco';
+$dbname = 'ali3d';
 $username = 'root';
 $password = '';
 
