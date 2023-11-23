@@ -1,6 +1,17 @@
+:root {
+  --azul_1: #0090E8;
+  --azul_2: #69A7EE;
+  --azul_3: #B0CCF6;
+  --azul_4: #ECF2FD;
+  --negro1: #000000;
+  --negro: #2F2F2F;
+  --negro2: #292929;
+  --blanco: #FFFFFF;
+}
+
 footer {
-  background-color: #255a66;
-  color: #fff;
+  background-color: var(--negro);
+  color: var(--blanco);
   padding-top: 1rem;
   padding-left: 5rem;
   padding-right: 5rem;
@@ -28,7 +39,7 @@ footer {
 }
 
 .nosotros p i {
-  color: #FCC9BD;
+  color: var(--blanco);
 }
 
 .medio {
@@ -77,15 +88,15 @@ footer {
 .categorias li a {
   font-size: 1.3rem;
   text-decoration: underline;
-  color: #fff;
+  color: var(--blanco);
 }
 
 .categorias li a:hover {
-  color: #FCC9BD;
+  color: var(--azul_2);
 }
 
 .titulo {
-  color: #ED82AD;
+  color: var(--blanco);
   font-weight: bold;
   font-size: 1.8rem;
   margin: 1rem;
@@ -108,7 +119,7 @@ footer {
   justify-content: center;
   width: 100%;
   height: content;
-  color: #7fd4dd;
+  color: var(--azul_2);
 }
 
 #copy p {

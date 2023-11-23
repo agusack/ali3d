@@ -126,6 +126,12 @@
     <div>
       <a href="/ali3d/index.php" class="button_subnav">Inicio</a>
     </div>
+    <div>
+      <a href="/ali3d/index.php" class="button_subnav">Objetos 3D</a>
+    </div>
+    <div>
+      <a href="/ali3d/index.php" class="button_subnav">Stickers</a>
+    </div>
     <div id="menuCategorias" class="menu">
       <a class="button_subnav">Categorías</a>
       <div class="menu-categorias" id="listaCategorias">

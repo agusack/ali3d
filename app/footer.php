@@ -41,11 +41,11 @@
       <?php } ?>
     </div>
     <div class="logo">
-        <img src="/Viroco/img/logos/viroco.png" alt="Viroco Regalería">
+        <img src="/ali3d/img/logos/ali3d.png" alt="ALI3D">
     </div>
   </div>
   </section>
   <div id="copy">
-    <p>Hecho con <i class="fa-solid fa-heart fa-beat" style="color: #FCC9BD;"></i> por <a href="https://www.instagram.com/ackagus/?hl=es-la" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; color: #7fd4dd;">@ackagus</a></p>
+    <p>Hecho con <i class="fa-solid fa-heart fa-beat" style="color: #FCC9BD;"></i> por <a href="https://www.instagram.com/ackagus/?hl=es-la" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; color: #69A7EE;">@ackagus</a></p>
   </div>
 </footer>

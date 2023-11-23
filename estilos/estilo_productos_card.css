@@ -1,3 +1,14 @@
+:root {
+  --azul_1: #0090E8;
+  --azul_2: #69A7EE;
+  --azul_3: #B0CCF6;
+  --azul_4: #ECF2FD;
+  --negro1: #000000;
+  --negro: #2F2F2F;
+  --negro2: #292929;
+  --blanco: #FFFFFF;
+}
+
 html {
     /* Establecer un tamaño de fuente base (1rem = 10px) */
     font-size: 62.5%;
@@ -12,8 +23,7 @@ html {
     overflow: visible;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.6);
     margin: 0.5rem;
-    border-radius: 1rem;
-    border: solid 1px #ed83ae;
+    border-radius: 2rem;
   }
 
   .card:hover {
@@ -23,32 +33,32 @@ html {
   
   .card-img {
     background-color: transparent;
-    height: 15rem;
-    width: 15rem;
-    border-radius: .5rem;
+    height: 17rem;
+    width: 17rem;
+    margin: -0.5rem 0 0 -0.5rem;
+    border-radius: 2rem;
     transition: .3s ease;
   }
   
   .card-info {
-    padding-top: 10%;
+    padding-top: 5%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: #255a66;
-  }
-  
-  svg {
-    width: 1.8rem;
-    height: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--negro2);
   }
   
   .card-footer {
     width: 100%;
+    height: auto;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     padding-top: .8rem;
-    border-top: 1px solid #ed83ae;
   }
   
   /* Text */
@@ -56,7 +66,7 @@ html {
     font-weight: bold;
     font-size: 1.5rem;
     line-height: 1.5rem;
-    color: #255a66;
+    color: var(--negro2);
   }
   
   .text-body {
@@ -67,22 +77,21 @@ html {
   
   /* Button */
   .card-button {
-    border: 1px solid #252525;
+    background-color: var(--azul_2);
+    color: var(--negro2);
+    width: 10rem;
     display: flex;
-    padding: .2rem;
+    padding: 0.5rem;
     cursor: pointer;
-    border-radius: 5rem;
+    border-radius: 1.5rem;
     transition: .3s ease-in-out;
+    margin-top: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
   }
-  
-  /* Hover 
-  .card-img:hover, .card-img img:hover {
-    transform: translateY(-25%);
-    box-shadow: rgba(226, 196, 63, 0.25) 0px 9px 32px -4px, rgba(180, 71, 71, 0.3) 0px 5px 10px -6px;
-  }
-  */
   
   .card-button:hover {
-    border: 1px solid #7fd4dd;
-    background-color: #7fd4dd;
+    background-color: var(--azul_1);
   }
