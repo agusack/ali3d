@@ -1,47 +1,22 @@
 <footer>
   <section id="conteiner_footer">
   <div class="nosotros">
-    <p class="titulo">NOSOTROS</p>
-    <p class="nos_detalles"><i class="fa-solid fa-location-dot"></i> San Martín 456, Río Grande</p>
+    <p class="titulo">NAVEGACIÓN</p>
+    <a href=""><p class="nos_detalles">Objetos 3D</p></a>
+    <a href=""><p class="nos_detalles">Stickers</p></a>
     <p class="nos_detalles"><i class="fa-brands fa-whatsapp"></i> 2964-454699</p>
-    <p class="nos_detalles"><i class="fa-regular fa-clock"></i> 10hs a 12hs - 16hs a 20hs</p>
   </div>
   <div class="medio">
     <div>
-      <img src="/Viroco/img/logos/clover.png" class="ajuste_img4" alt="Clover">
+      <img src="/ali3d/img/logos/ali3d.png" class="ajuste_img4" alt="Clover">
     </div>
   </div>
-  <div class="categorias">
-    <p class="titulo">CATEGORÍAS</p>
-    <div>
-    <?php
-      include('bd.php');
-      $categorias = obtenerCategorias($conexion);
-      $contador = 0;
-      ?>
-
-      <?php foreach ($categorias as $categoria) : ?>
-        <?php if ($contador === 0) { ?>
-          <ul>
-        <?php } ?>
-        <li>
-          <a href="/Viroco/app/tienda.php?categoria=<?php echo $categoria['id']; ?>">
-            <?php echo $categoria['nombre']; ?>
-          </a>
-        </li>
-        <?php $contador++; ?>
-        <?php if ($contador === 4) { ?>
-          </ul>
-          <?php $contador = 0; ?>
-        <?php } ?>
-      <?php endforeach; ?>
-
-      <?php if ($contador !== 0) { ?>
-        </ul>
-      <?php } ?>
-    </div>
-    <div class="logo">
-        <img src="/ali3d/img/logos/ali3d.png" alt="ALI3D">
+  <div class="redes">
+    <p class="titulo">NUESTRAS REDES</p>
+    <div id="icons">
+      <button><i class="fa-brands fa-facebook"></i></button>
+      <button><i class="fa-brands fa-instagram"></i></button>
+      <button><i class="fa-brands fa-x-twitter"></i></button>
     </div>
   </div>
   </section>

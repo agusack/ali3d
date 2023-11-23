@@ -133,7 +133,7 @@
       <a href="/ali3d/index.php" class="button_subnav">Stickers</a>
     </div>
     <div id="menuCategorias" class="menu">
-      <a class="button_subnav">Categorías</a>
+      <a class="button_subnav">Contacto</a>
       <div class="menu-categorias" id="listaCategorias">
         <?php $categorias = obtenerCategorias($conexion); ?>
         <?php foreach ($categorias as $categoria) : ?>
