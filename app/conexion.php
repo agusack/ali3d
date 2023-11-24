@@ -15,5 +15,5 @@ try {
 }
 
 // Define una constante para la URL de la página principal.
-define('URL_PRINCIPAL', '/Viroco/index.php');
+define('URL_PRINCIPAL', '/ali3d/index.php');
 ?>

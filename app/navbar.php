@@ -22,7 +22,7 @@
   } 
 
   // Número de productos por página
-  $productos_por_pagina = 10;
+  $productos_por_pagina = 15;
 
   // Página actual
   if (isset($_GET['pagina'])) {
@@ -127,10 +127,10 @@
       <a href="/ali3d/index.php" class="button_subnav">Inicio</a>
     </div>
     <div>
-      <a href="/ali3d/index.php" class="button_subnav">Objetos 3D</a>
+      <a href="/ali3d/app/tienda.php" class="button_subnav">Objetos 3D</a>
     </div>
     <div>
-      <a href="/ali3d/index.php" class="button_subnav">Stickers</a>
+      <a href="/ali3d/app/tienda.php" class="button_subnav">Stickers</a>
     </div>
     <div id="menuCategorias" class="menu">
       <a class="button_subnav">Contacto</a>
