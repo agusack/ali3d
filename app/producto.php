@@ -152,8 +152,8 @@ if ($producto["imagen4"]) {
             if (stock_disponible > 0) {
                 var boton = $('.card-button');
                 boton.css({
-                  'background-color': '#7fd4dd',
-                  'color': '#255a66',
+                  'background-color': '#0090E8',
+                  'color': '#FFFFFF',
                   'cursor': 'pointer',
                   'pointer-events': 'visible'
                 });

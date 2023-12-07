@@ -1,6 +1,6 @@
 <button id="toggle-menu">☰</button>
 <div class="sidebar" id="menu">
-    <div class="logo"><img src="../img/logos/viroco.png" alt="Viroco Regalería"></div>
+    <div class="logo"><img src="../img/logos/ali3d.png" alt="ALI3D"></div>
     <div>
         <a href="admin_panel.php"><i class="fa-solid fa-house"></i> Inicio</a>
         <a href="pedidos_admin.php"><i class="fa-solid fa-code-pull-request"></i> Pedidos</a>

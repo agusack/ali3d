@@ -38,7 +38,7 @@
     <h2>Productos 3D</h2>
     <div class="productos-list">
       <?php
-      $query = "SELECT * FROM `productos` ORDER BY `popular` DESC LIMIT 6";
+      $query = "SELECT * FROM `productos` WHERE `is_3d` = 1 ORDER BY `popular` DESC LIMIT 6";
       $resultado = mysqli_query($conexion, $query);
 
         while ($producto = mysqli_fetch_array($resultado)) {
@@ -59,13 +59,19 @@
 
   <div id="secciones" class="parent">
         <div id="seccion_3d" class="div1">
-          <div><p>Visita nuestra sección <br>3D</p></div>
+          <a href="app/tienda.php?is_3d=1">
+            <div><p>Visita nuestra sección <br>3D</p></div>
+          </a>
         </div>
         <div id="seccion_sticker" class="div2">
-          <div><p>Visita nuestra sección <br>Stickers</p></div>
+          <a href="app/tienda.php?is_3d=0">
+            <div><p>Visita nuestra sección <br>Stickers</p></div>
+          </a>
         </div>
         <div id="seccion_contacto" class="div3">
-          <div><p>¿Tenés una idea? contactate con nosotros</p></div>
+          <a href="">
+            <div><p>¿Tenés una idea? contactate con nosotros</p></div>
+          </a>
         </div>
   </div>
 
@@ -74,7 +80,7 @@
     <h2>Stickers</h2>
     <div class="productos-list">
       <?php
-      $query = "SELECT * FROM `productos` ORDER BY `id` DESC LIMIT 6";
+      $query = "SELECT * FROM `productos` WHERE 'is_3d' = 0 ORDER BY `popular` DESC LIMIT 6";
       $resultado = mysqli_query($conexion, $query);
 
       while ($producto = mysqli_fetch_array($resultado)) {

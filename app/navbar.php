@@ -1,4 +1,5 @@
 <?php
+
   // Obtener la categoría actual, si se especifica en la URL
   $categoria = isset($_GET['categoria']) ? $_GET['categoria'] : '';
 
@@ -23,17 +24,6 @@
 
   // Número de productos por página
   $productos_por_pagina = 15;
-
-  // Página actual
-  if (isset($_GET['pagina'])) {
-      $pagina_actual = intval($_GET['pagina']);
-  } else {
-      $pagina_actual = 1; // Página por defecto si no se especifica
-  }
-
-  // Calcula el offset y el límite
-  $offset = ($pagina_actual - 1) * $productos_por_pagina;
-  $query .= " LIMIT $offset, $productos_por_pagina";
 
   $resultado = mysqli_query($conexion, $query);
 

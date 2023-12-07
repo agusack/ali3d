@@ -47,18 +47,52 @@ require('funciones.php');
     <div class="productos">
       <ul class="productos-list">
           <?php
-          while ($producto = mysqli_fetch_array($resultado)) {
-            echo "<div class='card'><a href='app/producto.php?id=". $producto['id'] . "'>";
-            echo "<div class='card-img'><img class='card-img' src='" . $producto['imagen'] . "' alt='" . $producto['nombre'] . "'></div>";
-            echo "<div class='card-info'>";
-            echo "<p class='text-title'>" . $producto['nombre'] . "</p>";
-            echo "</div>";
-            echo "<div class='card-footer'>";
-            echo "<span class='text-title'> $" . $producto['precio'] . "</span></a>";
-            echo "<a href='app/producto.php?id=". $producto['id'] . "'><div class='card-button'> Ver más";
-            echo "</div></a>";
-            echo "</div></div>";
-          }
+            // Obtener el valor de is_3d, si se especifica en la URL
+            $is_3d = isset($_GET['is_3d']) ? $_GET['is_3d'] : '';
+
+            // Almacenar los resultados en un array
+            $productosArray = [];
+            while ($producto = mysqli_fetch_array($resultado)) {
+                $productosArray[] = $producto;
+            }
+
+            // Filtrar el array $productosArray solo si se especifica un valor para is_3d
+            if ($is_3d !== '') {
+                $productosFiltrados = array_filter($productosArray, function($producto) use ($is_3d) {
+                    // Comparar el valor de is_3d del producto con el valor proporcionado por el usuario
+                    return $producto['is_3d'] == $is_3d;
+                });
+            } else {
+                $productosFiltrados = $productosArray;
+            }
+
+            // Número de productos por página
+            $productos_por_pagina = 15;
+
+            // Página actual
+            if (isset($_GET['pagina'])) {
+                $pagina_actual = intval($_GET['pagina']);
+            } else {
+                $pagina_actual = 1; // Página por defecto si no se especifica
+            }
+
+            // Calcula el offset y el límite para la paginación
+            $offset = ($pagina_actual - 1) * $productos_por_pagina;
+            $productosMostrar = array_slice($productosFiltrados, $offset, $productos_por_pagina);
+
+            // Imprimir los resultados
+            foreach ($productosMostrar as $producto) {
+                echo "<div class='card'><a href='../app/producto.php?id=". $producto['id'] . "'>";
+                echo "<div class='card-img'><img class='card-img' src='" . $producto['imagen'] . "' alt='" . $producto['nombre'] . "'></div>";
+                echo "<div class='card-info'>";
+                echo "<p class='text-title'>" . $producto['nombre'] . "</p>";
+                echo "</div>";
+                echo "<div class='card-footer'>";
+                echo "<span class='text-title'> $" . $producto['precio'] . "</span></a>";
+                echo "<a href='../app/producto.php?id=". $producto['id'] . "'><div class='card-button'> Ver más";
+                echo "</div></a>";
+                echo "</div></div>";
+            }
           ?>
       </ul>
     </div>

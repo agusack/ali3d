@@ -1,6 +1,16 @@
+:root {
+  --azul_1: #0090E8;
+  --azul_2: #69A7EE;
+  --azul_3: #B0CCF6;
+  --azul_4: #ECF2FD;
+  --negro1: #000000;
+  --negro: #2F2F2F;
+  --blanco: #FFFFFF;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-image: url(../img/pattern/patternpad113.png);
+  background-color: var(--blanco);
     font-size: 62.5%; /* 1rem = 10px */
   }
   
@@ -24,7 +34,7 @@ body {
     width: 100%;
     height: content;
     padding: 3rem;
-    background-color: rgba(	232, 240, 254, 0.5);
+    background-color: var(--azul_4);
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
     border-radius: 2rem;
 }
@@ -58,18 +68,18 @@ body {
 .informacion h1 {
     width: auto;
     display: block;
-    color: #255a66;
+    color: var(--azul_1);
     text-decoration: underline;
 }
 
 .informacion h3 {
-  color: #255a66;
+  color: var(--negro);
   font-size: 2.4rem;
   margin-bottom: 2rem;
 }
 
 .informacion p {
-    color: #255a66;
+    color: var(--negro);
     font-size: 1.4rem;
 }
 
@@ -103,17 +113,17 @@ label {
   font-size: 1.4rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  color: #255a66;
+  color: var(--negro);
 }
 
 select {
   font-size: 1.4rem;
   font-weight: 400;
-  color: #255a66;
+  color: var(--azul_3);
   padding: 10px;
   width: 80%;
   border: none;
-  border-bottom: 1px solid #255a66;
+  border-bottom: 1px solid var(--negro);
   background-color: transparent;
   appearance: none;
   transition: border-color 0.3s ease-in-out;
@@ -123,7 +133,7 @@ select {
 
 select:focus {
   outline: none;
-  border-color: #7fd4dd;
+  border-color: var(--azul_3);
 }
 
 .card-button {
@@ -152,8 +162,8 @@ select:focus {
  }
  
  .card-button:hover {
-  background-color: #255a66;
-  color: #7fd4dd;
+  background-color: var(--azul_3);
+  color: var(--negro);
   box-shadow: 0 0.2rem 0.3rem rgba(0, 0, 0, 0.2), 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
   transform: translateY(0.1rem);
  }
@@ -168,7 +178,7 @@ select:focus {
   width: 80%;
   height: 3rem;
   display: none;
-  color: #255a66;
+  color: var(--azul_1);
 }
 
 
@@ -218,14 +228,14 @@ select:focus {
   height: 4rem;
   font-size: 2rem;
   font-weight: bold;
-  color: #255a66;
+  color: var(--azul_1);
   outline: none;
   text-align: center;
   width: 6rem;
 }
 
 .minus-btn, .plus-btn {
-  color: #255a66;
+  color: var(--azul_1);
   padding: 1rem;
   width: 5rem;
   text-align: center;
@@ -257,8 +267,8 @@ select:focus {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  background-color: #ED82AD;
-  border: 1px solid #ddd;
+  background-color: var(--azul_3);
+  border: 1px solid var(--negro);
   border-radius: 0.4rem;
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
