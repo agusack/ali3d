@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-09-2023 a las 23:53:51
+-- Tiempo de generación: 01-01-2024 a las 01:11:59
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `viroco`
+-- Base de datos: `ali3d`
 --
 
 -- --------------------------------------------------------
@@ -102,7 +102,7 @@ CREATE TABLE `combinaciones_producto` (
 --
 
 INSERT INTO `combinaciones_producto` (`id_combinacion`, `id_producto`, `combinacion_unica`, `stock`) VALUES
-(1, 29, 'Blanco - L', 20),
+(1, 29, 'Blanco - L', 18),
 (2, 29, 'Negro - L', 19),
 (3, 29, 'Negro - M', 19),
 (4, 29, 'Blanco - M', 19),
@@ -136,7 +136,9 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`id_pedido`, `id_usuario`, `nombre_usuario`, `correo_usuario`, `celular`, `fecha_pedido`, `total`, `entrega`, `metodo_pago`, `productos`) VALUES
-(20, 2, 'agustin', 'admin@admin.com', '13442', '2023-09-23 12:07:06', 101010.00, '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"asd\",\"DNI\":\"123\"}', 'efectivo', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":\"29_Blanco_L\"}]');
+(20, 2, 'agustin', 'admin@admin.com', '13442', '2023-09-23 12:07:06', 101010.00, '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"asd\",\"DNI\":\"123\"}', 'efectivo', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":\"29_Blanco_L\"}]'),
+(21, 2, 'agustin', 'admin@admin.com', '123123', '2023-12-02 17:48:57', 101010.00, '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"asdasd\",\"DNI\":\"123123\"}', 'efectivo', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":\"29_Blanco_L\"}]'),
+(22, 2, 'agustin', 'admin@admin.com', '12345654321', '2023-12-31 21:09:41', 101010.00, '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"agustin\",\"DNI\":\"12345654321\"}', 'efectivo', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":\"29_Blanco_L\"}]');
 
 -- --------------------------------------------------------
 
@@ -156,30 +158,31 @@ CREATE TABLE `productos` (
   `imagen` varchar(255) DEFAULT NULL,
   `imagen2` text NOT NULL,
   `imagen3` text NOT NULL,
-  `imagen4` text NOT NULL
+  `imagen4` text NOT NULL,
+  `is_3d` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `id_categoria`, `id_subcategoria`, `stock`, `popular`, `imagen`, `imagen2`, `imagen3`, `imagen4`) VALUES
-(1, 'Campera Negra con plumas', 'campera negra', 30.00, 1, 1, 22, 135, '/Viroco/img/productos/iphone7.jpg', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png'),
-(2, 'Remera roja', 'remera roja', 29.99, 1, 2, 0, 20, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png'),
-(3, 'Iphone 7', 'iphone 7', 99.99, 2, 3, 0, 8, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png'),
-(4, 'notebook HP', 'Descripción del producto de tecnología 2', 149.99, 2, 4, 0, 1, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png'),
-(5, 'Sillon L', 'sillon L', 49.99, 3, 5, 0, 8, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png'),
-(6, 'Cama 2 plazas', 'Descripción del producto de hogar 2', 79.99, 3, 6, 1, 4, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png'),
-(18, 'asd', 'qwe', 236.00, 1, 2, 0, 2, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png'),
-(19, 'asd', 'seba puto', 111.00, 2, 3, 0, 0, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png'),
-(21, 'prueba1 iphone', 'iphone', 123123.00, 2, 3, 0, 0, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png'),
-(22, 'prueba 2', 'asd', 1231.00, 1, 12, 0, 0, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png'),
-(23, 'prueba', 'asdasd', 123.00, 2, 4, 0, 7, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png'),
-(24, 'prueba caracteristica', 'prueba', 1231.00, 8, 15, 12, 0, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/iphone7.jpg', '', ''),
-(25, 'prueba caracteristica2', 'asd', 236.00, 8, 16, 22, 2, '/Viroco/img/productos/iphone7.jpg', '', '', ''),
-(29, 'para borrar', 'probando', 101010.00, 2, 4, 96, 54, '/Viroco/img/productos/foto_producto.png', '', '', ''),
-(31, 'compu', 'compu ga', 213432.00, 2, 3, 20, 0, '/Viroco/img/productos/foto_producto.png', '', '', ''),
-(32, 'prueba stock', 'asd', 123.00, 11, 19, 15, 0, '/Viroco/img/productos/i.jpg', '', '', '');
+INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `id_categoria`, `id_subcategoria`, `stock`, `popular`, `imagen`, `imagen2`, `imagen3`, `imagen4`, `is_3d`) VALUES
+(1, 'Campera Negra con plumas', 'campera negra', 30.00, 1, 1, 22, 135, '/Viroco/img/productos/iphone7.jpg', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 1),
+(2, 'Remera roja', 'remera roja', 29.99, 1, 2, 0, 20, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
+(3, 'Iphone 7', 'iphone 7', 99.99, 2, 3, 0, 8, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
+(4, 'notebook HP', 'Descripción del producto de tecnología 2', 149.99, 2, 4, 0, 1, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
+(5, 'Sillon L', 'sillon L', 49.99, 3, 5, 0, 8, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
+(6, 'Cama 2 plazas', 'Descripción del producto de hogar 2', 79.99, 3, 6, 1, 4, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
+(18, 'asd', 'qwe', 236.00, 1, 2, 0, 2, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
+(19, 'asd', 'seba puto', 111.00, 2, 3, 0, 0, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
+(21, 'prueba1 iphone', 'iphone', 123123.00, 2, 3, 0, 0, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
+(22, 'prueba 2', 'asd', 1231.00, 1, 12, 0, 0, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
+(23, 'prueba', 'asdasd', 123.00, 2, 4, 0, 7, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
+(24, 'prueba caracteristica', 'prueba', 1231.00, 8, 15, 12, 0, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/iphone7.jpg', '', '', 0),
+(25, 'prueba caracteristica2', 'asd', 236.00, 8, 16, 22, 2, '/Viroco/img/productos/iphone7.jpg', '', '', '', 0),
+(29, 'para borrar', 'probando', 101010.00, 2, 4, 94, 56, '/Viroco/img/productos/foto_producto.png', '', '', '', 0),
+(31, 'compu', 'compu ga', 213432.00, 2, 3, 20, 0, '/Viroco/img/productos/foto_producto.png', '', '', '', 0),
+(32, 'prueba stock', 'asd', 123.00, 11, 19, 15, 0, '/Viroco/img/productos/i.jpg', '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -194,6 +197,14 @@ CREATE TABLE `reservas_stock` (
   `cantidad_reservada` int(11) NOT NULL,
   `hora_reserva` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reservas_stock`
+--
+
+INSERT INTO `reservas_stock` (`id_reserva`, `id_producto`, `combinacion_unica`, `cantidad_reservada`, `hora_reserva`) VALUES
+(8, 29, 'Blanco - L', 1, '2023-12-02 20:46:43'),
+(9, 29, 'Blanco - L', 1, '2024-01-01 00:08:52');
 
 -- --------------------------------------------------------
 
@@ -374,7 +385,7 @@ ALTER TABLE `combinaciones_producto`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -386,7 +397,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `reservas_stock`
 --
 ALTER TABLE `reservas_stock`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `subcategorias`

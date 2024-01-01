@@ -161,6 +161,23 @@ body {
 
 
 @media screen and (max-width: 768px) {
+
+  #hero {
+    width: 100%;
+    height: 90vh;
+    background-image: url(../img/banner/hero.png);
+    background-size: auto;
+  }
+
+  #hero h1 {
+    font-size: 6rem;
+    text-align: center;
+    padding: 0rem 0rem 0rem 0rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .productos-list {
     grid-template-columns: repeat(2, 1fr); /* Mostrar 1 producto en celular */
   }
@@ -169,4 +186,54 @@ body {
     font-size: 2rem;
     width: 100%;
   }
+
+  #secciones {
+    width: 100%;
+    height: auto;
+    background-color: var(--azul_2);
+    padding: 0rem 2rem 0rem 2rem;
+  }
+
+  #seccion_contacto div {
+    height: 100%;
+  }
+
+  #seccion_3d, #seccion_sticker, #seccion_contacto {
+    padding: 4rem 2rem 4rem 2rem;
+    height: 40rem;
+  }
+
+  #seccion_contacto div p, #seccion_sticker div p, #seccion_3d div p   {
+    font-size: 3rem;
+  }
+
+  #seccion_contacto div p {
+    text-align: center;
+  }
+
+  .parent {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    }
+    
+    .div1 { grid-area: 1 / 1 / 2 / 2; }
+    .div2 { grid-area: 2 / 1 / 3 / 2; }
+    .div3 { grid-area: 3 / 1 / 4 / 2; }
+
+    .popular-products h2, .new-products h2 {
+      font-size: 2.5rem;
+      display: flex;
+      justify-content: center;
+      padding-left: 0rem;
+    }
+
+    .productos-list {
+      padding: 2rem 5rem 2rem 5rem;
+      grid-template-columns: repeat(2, 1fr); /* Mostrar 5 productos en escritorio */
+      grid-gap: 0.5rem;
+    }
+
 }

@@ -116,14 +116,8 @@
     <div>
       <a href="/ali3d/index.php" class="button_subnav">Inicio</a>
     </div>
-    <div>
-      <a href="/ali3d/app/tienda.php" class="button_subnav">Objetos 3D</a>
-    </div>
-    <div>
-      <a href="/ali3d/app/tienda.php" class="button_subnav">Stickers</a>
-    </div>
     <div id="menuCategorias" class="menu">
-      <a class="button_subnav">Contacto</a>
+      <a href="/ali3d/app/tienda.php?is_3d=1" class="button_subnav">3D</a>
       <div class="menu-categorias" id="listaCategorias">
         <?php $categorias = obtenerCategorias($conexion); ?>
         <?php foreach ($categorias as $categoria) : ?>
@@ -152,6 +146,40 @@
           </div>
         <?php endforeach; ?>
       </div>
+    </div>
+    <div id="menuCategorias" class="menu">
+      <a href="/ali3d/app/tienda.php?is_3d=0" class="button_subnav">Stickers</a>
+      <div class="menu-categorias" id="listaCategorias">
+        <?php $categorias = obtenerCategorias($conexion); ?>
+        <?php foreach ($categorias as $categoria) : ?>
+          <div class="categoria-principal">
+            <p>
+              <a href="/ali3d/app/tienda.php?categoria=<?php echo $categoria['id']; ?>">
+                <?php echo $categoria['nombre']; ?>
+              </a>
+            </p>
+            <ul class="subcategorias">
+              <?php foreach ($categoria['subcategorias'] as $subcategoria) : ?>
+                <li>
+                  <a href="/ali3d/app/tienda.php?categoria=<?php echo $categoria['id']; ?>&subcategoria=<?php echo $subcategoria['id']; ?>">
+                    <?php echo $subcategoria['nombre']; ?>
+                  </a>
+                  <?php if (!empty($subcategoria['productos'])): ?>
+                    <ul class="productos">
+                      <?php foreach ($subcategoria['productos'] as $producto) : ?>
+                        <li><?php echo $producto['nombre']; ?></li>
+                      <?php endforeach; ?>
+                    </ul>
+                  <?php endif; ?>
+                </li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+    <div>
+      <a class="button_subnav">Contacto</a>
     </div>
 </div>
 </div>

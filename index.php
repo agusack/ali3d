@@ -33,7 +33,7 @@
     <h1>Impresión 3D <br> y Stickers <br> a tu Estilo</h1>
   </div>
   <section id="conteiner_index">
-  <!-- Sección de productos populares -->
+  <!-- Sección de productos 3D -->
   <div class="popular-products">
     <h2>Productos 3D</h2>
     <div class="productos-list">
@@ -75,7 +75,7 @@
         </div>
   </div>
 
-  <!-- Sección de productos nuevos -->
+  <!-- Sección de Stickers -->
   <div class="new-products">
     <h2>Stickers</h2>
     <div class="productos-list">

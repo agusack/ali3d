@@ -28,17 +28,42 @@ require('funciones.php');
   <button id="toggle-menu">☰</button>
     <div id="menu" class="col-md-2">
     <div class="list-group">
+      <div id="filter">
+        <h4>FILTROS</h4>
+        <form onsubmit="return false;">
+          <div>
+            <label for="is_3d_1">Filtrar por 3D</label>
+            <input type="checkbox" name="is_3d_1" id="is_3d_1" <?php echo (isset($_GET['is_3d']) && $_GET['is_3d'] === '1') ? 'checked' : ''; ?> onclick="actualizarFiltro3D('1');">
+          </div>
+          <div>
+            <label for="is_3d_0">Filtrar por Sticker</label>
+            <input type="checkbox" name="is_3d_0" id="is_3d_0" <?php echo (isset($_GET['is_3d']) && $_GET['is_3d'] === '0') ? 'checked' : ''; ?> onclick="actualizarFiltro3D('0');">
+          </div>
+        </form>
+      </div>
       <h4>CATEGORÍAS</h4>
       <?php
-        $query = "SELECT id_categoria, nombre_categoria FROM categorias";
-        $result = mysqli_query($conexion, $query);
-        while ($categoria = mysqli_fetch_assoc($result)) {
-          echo '<a href="?categoria=' . $categoria['id_categoria'] . '" class="list-group-item" id="main-category">' . $categoria['nombre_categoria'] . '</a>';
-          $query = "SELECT id_subcategoria, nombre_subcategoria FROM subcategorias WHERE id_categoria=" . $categoria['id_categoria'];
-          $subcategorias = mysqli_query($conexion, $query);
-          while ($subcategoria = mysqli_fetch_assoc($subcategorias)) {
-            echo '<a href="?categoria=' . $categoria['id_categoria'] . '&subcategoria=' . $subcategoria['id_subcategoria'] . '" class="list-group-item" id="sub-category">' . $subcategoria['nombre_subcategoria'] . '</a>';
-          }
+        // Obtener el valor de is_3d, si se especifica en la URL
+        $is_3d = isset($_GET['is_3d']) ? $_GET['is_3d'] : '';
+
+        $query_categorias = "SELECT id_categoria, nombre_categoria FROM categorias";
+        $result_categorias = mysqli_query($conexion, $query_categorias);
+
+        while ($categoria = mysqli_fetch_assoc($result_categorias)) {
+            $enlace_categoria = "tienda.php?categoria=" . $categoria['id_categoria'];
+            // Mantener el parámetro is_3d
+            $enlace_categoria .= ($is_3d !== '') ? "&is_3d=$is_3d" : '';
+            echo '<a href="' . $enlace_categoria . '" class="list-group-item" id="main-category">' . $categoria['nombre_categoria'] . '</a>';
+
+            $query_subcategorias = "SELECT id_subcategoria, nombre_subcategoria FROM subcategorias WHERE id_categoria=" . $categoria['id_categoria'];
+            $result_subcategorias = mysqli_query($conexion, $query_subcategorias);
+
+            while ($subcategoria = mysqli_fetch_assoc($result_subcategorias)) {
+                $enlace_subcategoria = "tienda.php?categoria=" . $categoria['id_categoria'] . '&subcategoria=' . $subcategoria['id_subcategoria'];
+                // Mantener el parámetro is_3d
+                $enlace_subcategoria .= ($is_3d !== '') ? "&is_3d=$is_3d" : '';
+                echo '<a href="' . $enlace_subcategoria . '" class="list-group-item" id="sub-category">' . $subcategoria['nombre_subcategoria'] . '</a>';
+            }
         }
       ?>
     </div>
@@ -99,31 +124,42 @@ require('funciones.php');
   </section>
   <div class="pagination">
     <?php
-    // Calcula el número total de páginas
-    $query_total = "SELECT COUNT(*) as total FROM productos";
-    $resultado_total = mysqli_query($conexion, $query_total);
-    $fila_total = mysqli_fetch_assoc($resultado_total);
-    $total_productos = $fila_total['total'];
-    $total_paginas = ceil($total_productos / $productos_por_pagina);
+      // Obtener el valor de is_3d, si se especifica en la URL
+      $is_3d = isset($_GET['is_3d']) ? $_GET['is_3d'] : '';
 
-    $pagina_anterior = $pagina_actual - 1;
-    $pagina_siguiente = $pagina_actual + 1;
+      // Página actual
+      if (isset($_GET['pagina'])) {
+          $pagina_actual = intval($_GET['pagina']);
+      } else {
+          $pagina_actual = 1; // Página por defecto si no se especifica
+      }
 
-    if ($pagina_actual > 1) {
-        echo "<a href='tienda.php?pagina=$pagina_anterior'>Anterior</a>";
-    }
-    if ($total_paginas > 1) {
-        for ($i = 1; $i <= $total_paginas; $i++) {
-            if ($i == $pagina_actual) {
-                echo "<span class='current'>$i</span>";
-            } else {
-                echo "<a href='tienda.php?pagina=$i'>$i</a>";
-            }
-        }
-    }
-    if ($pagina_actual < $total_paginas) {
-        echo "<a href='tienda.php?pagina=$pagina_siguiente'>Siguiente</a>";
-    }
+      // Calcula el número total de páginas
+      $query_total = "SELECT COUNT(*) as total FROM productos";
+      $resultado_total = mysqli_query($conexion, $query_total);
+      $fila_total = mysqli_fetch_assoc($resultado_total);
+      $total_productos = $fila_total['total'];
+      $total_paginas = ceil($total_productos / $productos_por_pagina);
+
+      // Construir el enlace para la página anterior
+      $pagina_anterior = $pagina_actual - 1;
+      $enlace_anterior = ($pagina_anterior > 1) ? "tienda.php?pagina=$pagina_anterior&is_3d=$is_3d" : "tienda.php?pagina=1&is_3d=$is_3d";
+      echo "<a href='$enlace_anterior'>Anterior</a>";
+
+      // Construir los enlaces para las páginas intermedias
+      for ($i = 1; $i <= $total_paginas; $i++) {
+          $enlace_pagina = "tienda.php?pagina=$i&is_3d=$is_3d";
+          if ($i == $pagina_actual) {
+              echo "<span class='current'>$i</span>";
+          } else {
+              echo "<a href='$enlace_pagina'>$i</a>";
+          }
+      }
+
+      // Construir el enlace para la página siguiente
+      $pagina_siguiente = $pagina_actual + 1;
+      $enlace_siguiente = ($pagina_siguiente <= $total_paginas) ? "tienda.php?pagina=$pagina_siguiente&is_3d=$is_3d" : "tienda.php?pagina=$total_paginas&is_3d=$is_3d";
+      echo "<a href='$enlace_siguiente'>Siguiente</a>";
     ?>
 </div>
   </section>
@@ -135,6 +171,32 @@ require('funciones.php');
     toggleMenu.addEventListener('click', () => {
       menu.classList.toggle('visible');
     });
+
+    function actualizarFiltro3D(valor) {
+            // Obtener el estado actual de los checkboxes
+            var checkbox_1 = document.getElementById('is_3d_1');
+            var checkbox_0 = document.getElementById('is_3d_0');
+
+            // Determinar si ambos checkboxes están marcados o ninguno está marcado
+            var ambosClickeados = checkbox_1.checked && checkbox_0.checked;
+            var ningunoClickeado = !checkbox_1.checked && !checkbox_0.checked;
+
+            // Obtener la URL actual
+            var urlActual = new URL(window.location.href);
+
+            // Eliminar el parámetro is_3d de la URL si ambos están clickeados o ninguno está clickeado
+            if (ambosClickeados || ningunoClickeado) {
+                if (urlActual.searchParams.has('is_3d')) {
+                    urlActual.searchParams.delete('is_3d');
+                }
+            } else {
+                // Actualizar el parámetro is_3d en la URL según el checkbox clickeado
+                urlActual.searchParams.set('is_3d', valor);
+            }
+
+            // Redirigir a la URL actualizada
+            window.location.href = urlActual.toString();
+        }
   </script>
 </html>
 <?php

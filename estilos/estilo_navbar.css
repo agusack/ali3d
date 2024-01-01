@@ -285,6 +285,11 @@ button {
 
 @media screen and (max-width: 768px) { 
 
+  nav {
+    padding: 0.2rem 0rem 0rem 0rem;
+    height: 5rem;
+  }
+
   nav a {
     font-size: 1rem;
     width: max-content;
@@ -292,7 +297,8 @@ button {
   }
 
   #logo img {
-    width: 95%;
+    width: 5rem;
+    height: 5rem;
   }
 
   #subnav > div > a {
@@ -336,7 +342,8 @@ button {
   }
 
   #user {
-    justify-content: flex-end;
+    justify-content: center;
+    width: 3rem;
   }
 
   .button_nav {

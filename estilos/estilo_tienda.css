@@ -30,6 +30,21 @@ body {
     overflow-y: scroll;
 }
 
+#filter label {
+  font-size: 1.4rem;
+}
+
+#filter input {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+#filter form div {
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+}
+
 .list-group-item {
   border: 0;
   padding: 1rem 1.5rem;
@@ -139,12 +154,34 @@ body {
       font-size: 1.5rem;
       display: block;
       position: fixed;
-      top: 7rem;
+      top: 8rem;
       z-index: 201;
       font-weight: bold;
-      background-color: #FCC9BD;
+      background-color: var(--azul_3);
       border-radius: 0;
-      color: #255a66;
+      color: var(--blanco);
     }
+
+    #filter {
+      margin-top: 3.5rem;
+    }
+
+    .productos-list {
+      width: 80%;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+    }
+
+    #seccion-productos {
+      height: 100%;
+    }
+    
+    .productos {
+      width: auto;
+      height: max-content;
+      display: flex;
+      justify-content: center;
+    }
+    
   }
   
