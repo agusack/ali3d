@@ -4,7 +4,7 @@
     <p class="titulo">NAVEGACIÓN</p>
     <a href=""><p class="nos_detalles">Objetos 3D</p></a>
     <a href=""><p class="nos_detalles">Stickers</p></a>
-    <p class="nos_detalles"><i class="fa-brands fa-whatsapp"></i> 2964-454699</p>
+    <p class="nos_detalles"><i class="fa-brands fa-whatsapp"></i> 2964-405759</p>
   </div>
   <div class="medio">
     <div>

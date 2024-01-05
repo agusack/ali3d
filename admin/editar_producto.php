@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Actualizar producto en la base de datos
-    $sql = "UPDATE productos SET nombre = :nombre, descripcion = :descripcion, precio = :precio, id_categoria = :categoria, id_subcategoria = :subcategoria, stock = :stock, imagen = :imagen, imagen2 = :imagen2, imagen3 = :imagen3, imagen4 = :imagen4 WHERE id = :id";
+    $sql = "UPDATE productos SET nombre = :nombre, descripcion = :descripcion, precio = :precio, id_categoria = :categoria, id_subcategoria = :subcategoria, stock = :stock, imagen = :imagen, imagen2 = :imagen2, imagen3 = :imagen3, imagen4 = :imagen4, is_3d = :is_3d WHERE id = :id";
 
     $stmt = $conexion->prepare($sql);
     $stmt->execute([
@@ -62,7 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ':imagen' => $imagen,
         ':imagen2' => $imagen2,
         ':imagen3' => $imagen3,
-        ':imagen4' => $imagen4
+        ':imagen4' => $imagen4,
+        ':is_3d' => isset($_POST['is_3d']) ? 1 : 0  // Verifica si el checkbox está marcado
     ]);
 
     // Actualizar características existentes
@@ -259,6 +260,10 @@ $caracteristicas = $stmt_caracteristicas->fetchAll(PDO::FETCH_ASSOC);
                 <input type="hidden" name="imagen2" value="<?php echo $row['imagen2'] ?>">
                 <input type="hidden" name="imagen3" value="<?php echo $row['imagen3'] ?>">
                 <input type="hidden" name="imagen4" value="<?php echo $row['imagen4'] ?>">
+
+                <label for="is_3d" style="font-weight: bold;">¿Es un producto 3D?</label>
+                <input type="checkbox" name="is_3d" id="is_3d" value="1" <?php if ($row['is_3d'] == 1) echo 'checked'; ?>>
+
 
                 <h3 style="margin-top: 20px; margin-bottom: 5px; font-weight: bold;">Características existentes:</h3>
                 <div id="contenedorCaracteristicasExistentes">

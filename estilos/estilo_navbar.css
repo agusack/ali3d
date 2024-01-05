@@ -9,7 +9,7 @@
 }
 
 nav {
-  background-color: var(--azul_3);
+  background-color: var(--azul_2);
   height: 4rem;
   padding: 0.2rem 1rem 0rem 1rem;
 }
@@ -126,7 +126,7 @@ button {
   align-items: center;
   padding-left: 25%;
   padding-right: 25%;
-  background-color: var(--azul_3);
+  background-color: var(--azul_2);
 }
 
 .button_nav {
@@ -145,7 +145,7 @@ button {
  }
 
  .button_subnav {
-  background-color: var(--azul_3);
+  background-color: var(--azul_2);
   border-radius: .5rem;
   padding: .1rem;
   padding-left: 1rem;
@@ -190,7 +190,7 @@ button {
   top: 100%;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  background-color: var(--azul_3);
+  background-color: var(--azul_2);
   z-index: 20;
 }
 
@@ -265,7 +265,7 @@ button {
   top: 0%;
   right: 0;
   padding: 0.5rem;
-  background-color: var(--azul_1);
+  background-color: var(--azul_2);
   border: 1px solid #255a66;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   z-index: 999;

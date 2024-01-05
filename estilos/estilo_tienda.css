@@ -19,7 +19,7 @@ body {
 }
 
 .col-md-2 {
-    background-color: var(--azul_3);
+    background-color: var(--azul_2);
     color: var(--negro);
     padding-top: 1rem;
     padding-left: 2rem;
@@ -55,12 +55,12 @@ body {
 }
 
 .list-group-item:hover, #main-category:hover, #sub-category:hover {
-  background-color: var(--azul_2);
+  background-color: var(--azul_3);
   color: var(--blanco);
 }
 
 .list-group h4 {
-  color: var(--azul_1);
+  color: var(--blanco);
   text-decoration: underline;
 }
 
@@ -157,7 +157,7 @@ body {
       top: 8rem;
       z-index: 201;
       font-weight: bold;
-      background-color: var(--azul_3);
+      background-color: var(--azul_2);
       border-radius: 0;
       color: var(--blanco);
     }

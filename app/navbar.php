@@ -117,20 +117,20 @@
       <a href="/ali3d/index.php" class="button_subnav">Inicio</a>
     </div>
     <div id="menuCategorias" class="menu">
-      <a href="/ali3d/app/tienda.php?is_3d=1" class="button_subnav">3D</a>
+      <a href="/ali3d/app/tienda.php?is_3d=1" class="button_subnav">Objetos 3D</a>
       <div class="menu-categorias" id="listaCategorias">
         <?php $categorias = obtenerCategorias($conexion); ?>
         <?php foreach ($categorias as $categoria) : ?>
           <div class="categoria-principal">
             <p>
-              <a href="/ali3d/app/tienda.php?categoria=<?php echo $categoria['id']; ?>">
+              <a href="/ali3d/app/tienda.php?is_3d=1&categoria=<?php echo $categoria['id']; ?>">
                 <?php echo $categoria['nombre']; ?>
               </a>
             </p>
             <ul class="subcategorias">
               <?php foreach ($categoria['subcategorias'] as $subcategoria) : ?>
                 <li>
-                  <a href="/ali3d/app/tienda.php?categoria=<?php echo $categoria['id']; ?>&subcategoria=<?php echo $subcategoria['id']; ?>">
+                  <a href="/ali3d/app/tienda.php?is_3d=1&categoria=<?php echo $categoria['id']; ?>&subcategoria=<?php echo $subcategoria['id']; ?>">
                     <?php echo $subcategoria['nombre']; ?>
                   </a>
                   <?php if (!empty($subcategoria['productos'])): ?>
@@ -147,21 +147,21 @@
         <?php endforeach; ?>
       </div>
     </div>
-    <div id="menuCategorias" class="menu">
+    <div id="menuCategorias2" class="menu">
       <a href="/ali3d/app/tienda.php?is_3d=0" class="button_subnav">Stickers</a>
-      <div class="menu-categorias" id="listaCategorias">
+      <div class="menu-categorias" id="listaCategorias2">
         <?php $categorias = obtenerCategorias($conexion); ?>
         <?php foreach ($categorias as $categoria) : ?>
           <div class="categoria-principal">
             <p>
-              <a href="/ali3d/app/tienda.php?categoria=<?php echo $categoria['id']; ?>">
+              <a href="/ali3d/app/tienda.php?is_3d=0&categoria=<?php echo $categoria['id']; ?>">
                 <?php echo $categoria['nombre']; ?>
               </a>
             </p>
             <ul class="subcategorias">
               <?php foreach ($categoria['subcategorias'] as $subcategoria) : ?>
                 <li>
-                  <a href="/ali3d/app/tienda.php?categoria=<?php echo $categoria['id']; ?>&subcategoria=<?php echo $subcategoria['id']; ?>">
+                  <a href="/ali3d/app/tienda.php?is_3d=0&categoria=<?php echo $categoria['id']; ?>&subcategoria=<?php echo $subcategoria['id']; ?>">
                     <?php echo $subcategoria['nombre']; ?>
                   </a>
                   <?php if (!empty($subcategoria['productos'])): ?>
@@ -177,6 +177,9 @@
           </div>
         <?php endforeach; ?>
       </div>
+    </div>
+    <div>
+      <a class="button_subnav">Papelería</a>
     </div>
     <div>
       <a class="button_subnav">Contacto</a>
@@ -212,6 +215,36 @@
   // cierra el menu si el mouse se mueve fuera de la lista de categorias
   listaCategorias.addEventListener("mouseleave", function() {
     listaCategorias.style.display = "none";
+  });
+
+  const menuCategorias2 = document.querySelector("#menuCategorias2");
+  const listaCategorias2 = document.querySelector("#listaCategorias2");
+
+  // muestra el menu de categorias al pasar el mouse por encima
+  menuCategorias2.addEventListener("mouseover", function() {
+    listaCategorias2.style.display = "flex";
+  });
+
+  // cierra el menu de categorias si el mouse se mueve fuera de él
+  menuCategorias2.addEventListener("mouseleave", function() {
+    listaCategorias2.style.display = "none";
+  });
+
+  // evita que el menu se cierre si el mouse esta dentro de el
+  listaCategorias2.addEventListener("mouseover", function() {
+    listaCategorias2.style.display = "flex";
+  });
+
+  // cierra el menu si el mouse da clic en cualquier parte dentro del documento
+  document.addEventListener("click", function(e) {
+    if (!menuCategorias.contains(e.target)) {
+      listaCategorias2.style.display = "none";
+    }
+  });
+
+  // cierra el menu si el mouse se mueve fuera de la lista de categorias
+  listaCategorias2.addEventListener("mouseleave", function() {
+    listaCategorias2.style.display = "none";
   });
 
   // Obtener el elemento que contiene el nombre de usuario

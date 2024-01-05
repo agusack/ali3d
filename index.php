@@ -38,7 +38,7 @@
     <h2>Productos 3D</h2>
     <div class="productos-list">
       <?php
-      $query = "SELECT * FROM `productos` WHERE `is_3d` = 1 ORDER BY `popular` DESC LIMIT 6";
+      $query = "SELECT * FROM `productos` WHERE `is_3d` = 1 LIMIT 6";
       $resultado = mysqli_query($conexion, $query);
 
         while ($producto = mysqli_fetch_array($resultado)) {
@@ -80,18 +80,18 @@
     <h2>Stickers</h2>
     <div class="productos-list">
       <?php
-      $query = "SELECT * FROM `productos` WHERE 'is_3d' = 0 ORDER BY `popular` DESC LIMIT 6";
-      $resultado = mysqli_query($conexion, $query);
+      $query2 = "SELECT * FROM `productos` WHERE 'is_3d' = 0 LIMIT 6";
+      $resultado2 = mysqli_query($conexion, $query2);
 
-      while ($producto = mysqli_fetch_array($resultado)) {
-        echo "<div class='card'><a href='app/producto.php?id=". $producto['id'] . "'>";
-        echo "<div class='card-img'><img class='card-img' src='" . $producto['imagen'] . "' alt='" . $producto['nombre'] . "'></div>";
+      while ($producto2 = mysqli_fetch_array($resultado2)) {
+        echo "<div class='card'><a href='app/producto.php?id=". $producto2['id'] . "'>";
+        echo "<div class='card-img'><img class='card-img' src='" . $producto2['imagen'] . "' alt='" . $producto2['nombre'] . "'></div>";
         echo "<div class='card-info'>";
-        echo "<p class='text-title'>" . $producto['nombre'] . "</p>";
+        echo "<p class='text-title'>" . $producto2['nombre'] . "</p>";
         echo "</div>";
         echo "<div class='card-footer'>";
-        echo "<span class='text-title'> $" . $producto['precio'] . "</span></a>";
-        echo "<a href='app/producto.php?id=". $producto['id'] . "'><div class='card-button'> Ver más";
+        echo "<span class='text-title'> $" . $producto2['precio'] . "</span></a>";
+        echo "<a href='app/producto.php?id=". $producto2['id'] . "'><div class='card-button'> Ver más";
         echo "</div></a>";
         echo "</div></div>";
       }

@@ -136,7 +136,7 @@ footer {
   }
 
   .titulo {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 
   .nos_detalles {
@@ -145,6 +145,28 @@ footer {
 
   .categorias li a {
     font-size: 1.1rem;
+  }
+
+  #icons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+    margin-top: 1rem;
+    margin-right: 2rem;
+  }
+  
+  #icons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+  }
+
+  #icons button i {
+    font-size: 1.5rem;
   }
 
   #copy p {

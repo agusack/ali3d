@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
         $tmp_name = $_FILES["imagen"]["tmp_name"];
         $name = basename($_FILES["imagen"]["name"]);
-        $target_dir = "/Viroco/img/productos/";
+        $target_dir = "/ali3d/img/productos/";
         $target_file = $target_dir . $name;
 
         // Mueve el archivo cargado a la carpeta de destino
@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Insertar nuevo producto en la base de datos
-    $sql = "INSERT INTO productos (nombre, descripcion, precio, id_categoria, id_subcategoria, stock, imagen, imagen2, imagen3, imagen4) VALUES (:nombre, :descripcion, :precio, :categoria, :subcategoria, :stock, :imagen, :imagen2, :imagen3, :imagen4)";
+    $sql = "INSERT INTO productos (nombre, descripcion, precio, id_categoria, id_subcategoria, stock, imagen, imagen2, imagen3, imagen4, is_3d) VALUES (:nombre, :descripcion, :precio, :categoria, :subcategoria, :stock, :imagen, :imagen2, :imagen3, :imagen4, :is_3d)";
     $stmt = $conexion->prepare($sql);
     $stmt->execute([
         ':nombre' => $nombre_producto,
@@ -94,7 +94,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ':imagen' => $imagen,
         ':imagen2' => $imagen2,
         ':imagen3' => $imagen3,
-        ':imagen4' => $imagen4
+        ':imagen4' => $imagen4,
+        ':is_3d' => isset($_POST['is_3d']) ? 1 : 0,
     ]);
 
     // Recuperar el ID del producto recién insertado
@@ -199,6 +200,9 @@ $resultado_subcategorias = $conexion->query($sql_subcategorias);
 
                 <label for="imagen4" style="font-weight: bold;">Imagen 4 (opcional):</label>
                 <input type="file" name="imagen4" id="imagen4" accept="image/*"><br>
+
+                <label for="is_3d" style="font-weight: bold;">¿Es un producto 3D?</label>
+                <input type="checkbox" name="is_3d" id="is_3d" value="1">
 
                 <h3 style="margin-bottom: 5px; font-weight: bold;">Características:</h3>
                 <div id="contenedorCaracteristicas">
