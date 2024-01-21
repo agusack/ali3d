@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-01-2024 a las 01:11:59
+-- Tiempo de generación: 21-01-2024 a las 06:27:39
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -39,25 +39,14 @@ CREATE TABLE `caracteristicas` (
 --
 
 INSERT INTO `caracteristicas` (`id_caracteristica`, `id_producto`, `nombre`, `valor`) VALUES
-(3, 2, 'color', 'rojo'),
-(4, 2, 'tamaño', 'L'),
-(5, 2, 'modelo', 'A'),
-(7, 24, 'Color', 'Negro'),
-(8, 24, 'Talla ', 'M'),
-(9, 25, 'Color', 'Negro'),
-(23, 1, 'Color', 'blanco'),
-(24, 1, 'Color', 'negro'),
-(25, 1, 'COLOR', 'negro'),
-(26, 29, 'Color', 'Blanco'),
-(27, 29, 'Color', 'Negro'),
-(28, 29, 'Talla', 'L'),
-(29, 29, 'Talla', 'M'),
-(34, 31, 'Color', 'rojo'),
-(35, 31, 'Color', 'negro'),
-(36, 31, 'Color', 'blanco'),
-(37, 31, 'Talle', 'L'),
-(38, 31, 'Talle', 'L'),
-(47, 29, 'Color', 'Violeta');
+(48, 34, 'Talla', 'Grande (50x50)'),
+(49, 34, 'Talla', 'Mediano (30x30)'),
+(50, 34, 'Talla', 'Chico (20x20)'),
+(51, 48, 'Talla', 'Grande (50x50)'),
+(52, 48, 'Talla', 'Mediano (30x30)'),
+(53, 48, 'Talla', 'Chico (20x20)'),
+(54, 48, 'Color', 'Pintado'),
+(55, 48, 'Color', 'Sin pintar');
 
 -- --------------------------------------------------------
 
@@ -75,14 +64,26 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id_categoria`, `nombre_categoria`) VALUES
-(1, 'Moda'),
-(2, 'Tecnología'),
-(3, 'Hogar'),
-(7, 'Bazar'),
-(8, 'Deco'),
-(9, 'Prueba1'),
-(10, 'Prueba2'),
-(11, 'Bazar2');
+(14, 'Futbol'),
+(15, 'Infantil');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categorias_papel`
+--
+
+CREATE TABLE `categorias_papel` (
+  `id_cat_papel` int(11) NOT NULL,
+  `nombre_cat_papel` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `categorias_papel`
+--
+
+INSERT INTO `categorias_papel` (`id_cat_papel`, `nombre_cat_papel`) VALUES
+(10001, 'prueba id cat papel');
 
 -- --------------------------------------------------------
 
@@ -102,15 +103,9 @@ CREATE TABLE `combinaciones_producto` (
 --
 
 INSERT INTO `combinaciones_producto` (`id_combinacion`, `id_producto`, `combinacion_unica`, `stock`) VALUES
-(1, 29, 'Blanco - L', 18),
-(2, 29, 'Negro - L', 19),
-(3, 29, 'Negro - M', 19),
-(4, 29, 'Blanco - M', 19),
-(7, 31, 'rojo - L', 10),
-(8, 31, 'rojo - L', 10),
-(9, 32, 'Negro - M', 10),
-(10, 32, 'blanco - M', 5),
-(11, 29, 'Violeta - M', 19);
+(12, 48, 'Grande (50x50) - Pintado', 53),
+(13, 48, 'Mediano (30x30) - Pintado', 10),
+(14, 48, 'Chico (20x20) - Pintado', 50);
 
 -- --------------------------------------------------------
 
@@ -136,9 +131,7 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`id_pedido`, `id_usuario`, `nombre_usuario`, `correo_usuario`, `celular`, `fecha_pedido`, `total`, `entrega`, `metodo_pago`, `productos`) VALUES
-(20, 2, 'agustin', 'admin@admin.com', '13442', '2023-09-23 12:07:06', 101010.00, '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"asd\",\"DNI\":\"123\"}', 'efectivo', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":\"29_Blanco_L\"}]'),
-(21, 2, 'agustin', 'admin@admin.com', '123123', '2023-12-02 17:48:57', 101010.00, '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"asdasd\",\"DNI\":\"123123\"}', 'efectivo', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":\"29_Blanco_L\"}]'),
-(22, 2, 'agustin', 'admin@admin.com', '12345654321', '2023-12-31 21:09:41', 101010.00, '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"agustin\",\"DNI\":\"12345654321\"}', 'efectivo', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":\"29_Blanco_L\"}]');
+(25, 2, 'agustin', 'admin@admin.com', '2964405759', '2024-01-01 18:07:54', 10000.00, '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"Agustin Ackerman\",\"DNI\":\"41402558\"}', 'efectivo', '[{\"producto\":\"Figura de Hulk\",\"caracteristicas\":{\"Talla\":\"Grande (50x50)\",\"Color\":\"Pintado\"},\"cantidad\":\"2\",\"id_producto\":\"48_Grande (50x50)_Pintado\"}]');
 
 -- --------------------------------------------------------
 
@@ -159,7 +152,7 @@ CREATE TABLE `productos` (
   `imagen2` text NOT NULL,
   `imagen3` text NOT NULL,
   `imagen4` text NOT NULL,
-  `is_3d` tinyint(1) NOT NULL
+  `is_3d` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -167,22 +160,23 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `id_categoria`, `id_subcategoria`, `stock`, `popular`, `imagen`, `imagen2`, `imagen3`, `imagen4`, `is_3d`) VALUES
-(1, 'Campera Negra con plumas', 'campera negra', 30.00, 1, 1, 22, 135, '/Viroco/img/productos/iphone7.jpg', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 1),
-(2, 'Remera roja', 'remera roja', 29.99, 1, 2, 0, 20, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
-(3, 'Iphone 7', 'iphone 7', 99.99, 2, 3, 0, 8, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
-(4, 'notebook HP', 'Descripción del producto de tecnología 2', 149.99, 2, 4, 0, 1, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
-(5, 'Sillon L', 'sillon L', 49.99, 3, 5, 0, 8, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
-(6, 'Cama 2 plazas', 'Descripción del producto de hogar 2', 79.99, 3, 6, 1, 4, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
-(18, 'asd', 'qwe', 236.00, 1, 2, 0, 2, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
-(19, 'asd', 'seba puto', 111.00, 2, 3, 0, 0, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
-(21, 'prueba1 iphone', 'iphone', 123123.00, 2, 3, 0, 0, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
-(22, 'prueba 2', 'asd', 1231.00, 1, 12, 0, 0, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
-(23, 'prueba', 'asdasd', 123.00, 2, 4, 0, 7, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/foto_producto.png', 0),
-(24, 'prueba caracteristica', 'prueba', 1231.00, 8, 15, 12, 0, '/Viroco/img/productos/foto_producto.png', '/Viroco/img/productos/iphone7.jpg', '', '', 0),
-(25, 'prueba caracteristica2', 'asd', 236.00, 8, 16, 22, 2, '/Viroco/img/productos/iphone7.jpg', '', '', '', 0),
-(29, 'para borrar', 'probando', 101010.00, 2, 4, 94, 56, '/Viroco/img/productos/foto_producto.png', '', '', '', 0),
-(31, 'compu', 'compu ga', 213432.00, 2, 3, 20, 0, '/Viroco/img/productos/foto_producto.png', '', '', '', 0),
-(32, 'prueba stock', 'asd', 123.00, 11, 19, 15, 0, '/Viroco/img/productos/i.jpg', '', '', '', 0);
+(33, 'Boca Juniors', 'Escudo Boca Juniors', 500.00, 14, 21, 0, 0, '/Viroco/img/productos/Boca.jpg', '', '', '', 2),
+(34, 'Mate de Boca', 'Mate de Boca en 3D', 2000.00, 14, 21, 50, 0, '/Viroco/img/productos/mate boca.jpg', '', '', '', 1),
+(35, 'River Plate', 'Escudo de River Plate', 500.00, 14, 22, 100, 0, '/Viroco/img/productos/riber escudo.jpg', '', '', '', 2),
+(36, 'Escudo de River', 'Escudo de River en 3D', 1500.00, 14, 22, 50, 0, '/Viroco/img/productos/riber.png', '', '', '', 1),
+(37, 'Hulk', 'Sticker de Hulk', 250.00, 15, 24, 100, 0, '/Viroco/img/productos/hulk2.jpg', '', '', '', 2),
+(38, 'Hello Kitty', 'Sticker de Hello Kitty', 300.00, 15, 26, 50, 0, '/Viroco/img/productos/kitty.jpg', '', '', '', 2),
+(39, 'Peppa Pig', 'Sticker de Peppa Pig', 150.00, 15, 26, 50, 0, '/Viroco/img/productos/pepa.jpg', '', '', '', 2),
+(40, 'Messi', 'Sticker de Messi ', 500.00, 14, 23, 500, 0, '/Viroco/img/productos/messi 2.jpg', '/Viroco/img/productos/messi.jpg', '', '', 2),
+(41, 'Homero Simpson', 'Sticker de Homer Simpson', 500.00, 15, 26, 20, 0, '/Viroco/img/productos/homero.jpg', '', '', '', 2),
+(42, 'Marvel', 'Sticker de Marvel', 100.00, 15, 24, 20, 0, '/Viroco/img/productos/marvel.jpg', '', '', '', 2),
+(43, 'Capitan America ', 'Stiker de Capitan America', 150.00, 15, 24, 50, 0, '/Viroco/img/productos/capitan america.jpg', '', '', '', 2),
+(44, 'Copa del mundo', 'Copa del mundo Argentina', 4000.00, 14, 23, 100, 0, '/Viroco/img/productos/copa del mundo.jpg', '', '', '', 3),
+(45, 'Hello kitty ', 'Hello Kitty ', 3000.00, 15, 26, 10, 0, '/Viroco/img/productos/kitty.jpg', '', '', '', 1),
+(46, 'Llavero Hello Kitty', 'Llavero de Hello Kitty ', 1000.00, 15, 26, 60, 0, '/Viroco/img/productos/kitty llavero.webp', '', '', '', 1),
+(47, 'Llavero de Argentina', 'Llavero de Argentina', 1000.00, 14, 23, 50, 0, '/Viroco/img/productos/Argentina.png', '', '', '', 1),
+(48, 'Figura de Hulk', 'Figura de Hulk en 3D', 5000.00, 15, 24, 113, 3, '/Viroco/img/productos/hulk.jpg', '', '', '', 1),
+(49, 'prueba papel', 'prueba papel', 123123.00, 10001, 10000, 0, 0, '/ali3d/img/productos/foto_producto.png', '', '', '', 3);
 
 -- --------------------------------------------------------
 
@@ -203,8 +197,9 @@ CREATE TABLE `reservas_stock` (
 --
 
 INSERT INTO `reservas_stock` (`id_reserva`, `id_producto`, `combinacion_unica`, `cantidad_reservada`, `hora_reserva`) VALUES
-(8, 29, 'Blanco - L', 1, '2023-12-02 20:46:43'),
-(9, 29, 'Blanco - L', 1, '2024-01-01 00:08:52');
+(10, 48, 'Grande (50x50) - Pintado', 1, '2024-01-01 21:04:26'),
+(11, 48, 'Mediano (30x30) - Pintado', 2, '2024-01-01 21:05:30'),
+(12, 48, 'Grande (50x50) - Pintado', 2, '2024-01-01 21:07:30');
 
 -- --------------------------------------------------------
 
@@ -223,20 +218,31 @@ CREATE TABLE `subcategorias` (
 --
 
 INSERT INTO `subcategorias` (`id_subcategoria`, `nombre_subcategoria`, `id_categoria`) VALUES
-(1, 'Camperas', 1),
-(2, 'Remeras', 1),
-(3, 'Telefonos', 2),
-(4, 'Notebooks', 2),
-(5, 'Sillones', 3),
-(6, 'Camas', 3),
-(12, 'asd', 1),
-(13, 'Bazar 1', 7),
-(14, 'Bazar 2', 7),
-(15, 'Deco 1', 8),
-(16, 'Deco 2', 8),
-(17, 'Deco 3', 8),
-(18, 'Deco 4', 8),
-(19, 'Tazas', 11);
+(21, 'Boca Juniors', 14),
+(22, 'River Plate', 14),
+(23, 'Argetina', 14),
+(24, 'Marvel', 15),
+(25, 'Los Simpsons', 15),
+(26, 'Niños', 15);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `subcategorias_papel`
+--
+
+CREATE TABLE `subcategorias_papel` (
+  `id_subcat_papel` int(11) NOT NULL,
+  `nombre_subcat_papel` varchar(50) NOT NULL,
+  `id_cat_papel` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `subcategorias_papel`
+--
+
+INSERT INTO `subcategorias_papel` (`id_subcat_papel`, `nombre_subcat_papel`, `id_cat_papel`) VALUES
+(10000, 'prueba sid subcat papel', 10001);
 
 -- --------------------------------------------------------
 
@@ -283,20 +289,8 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`id_venta`, `id_usuario`, `nombre_usuario`, `correo_usuario`, `fecha_venta`, `total`, `estado`, `entrega`, `productos`) VALUES
-(6, 2, 'agustin', 'admin@admin.com', '2023-09-13 23:11:21', 101010.00, 'Aprobado', '{\"Entrega\":\"Envio a domicilio\",\"Nombre\":\"Agustin Ackerman\",\"Telefono\":\"1234567890\",\"Ciudad\":\"rg\",\"Calle\":\"oh\",\"Altura\":\"123\",\"Depto\":\"1234\",\"Codigo Postal\":\"4321\"}', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":29}]'),
-(7, 2, 'agustin', 'admin@admin.com', '2023-09-13 23:16:13', 101010.00, 'Aprobado', '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"asdasd\",\"DNI\":\"3121321\"}', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":29}]'),
-(8, 2, 'agustin', 'admin@admin.com', '2023-09-13 23:16:21', 202020.00, 'Rechazado', '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"asdasd\",\"DNI\":\"123123\"}', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":2,\"id_producto\":29}]'),
-(9, 2, 'agustin', 'admin@admin.com', '2023-09-14 11:14:15', 101010.00, 'Aprobado', '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"Agustin Ackerman\",\"DNI\":\"41402558\"}', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":29}]'),
-(10, 2, 'agustin', 'admin@admin.com', '2023-09-14 11:15:02', 101010.00, 'Rechazado', '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"asdasd\",\"DNI\":\"123123\"}', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":29}]'),
-(11, 2, 'agustin', 'admin@admin.com', '2023-09-14 20:47:41', 101010.00, 'Aprobado', '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"asdasd\",\"DNI\":\"123123\"}', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":29}]'),
-(12, 2, 'agustin', 'admin@admin.com', '2023-09-14 20:47:47', 101010.00, 'Rechazado', '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"asdasd\",\"DNI\":\"123123\"}', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":29}]'),
-(13, 2, 'agustin', 'admin@admin.com', '2023-09-15 22:12:38', 101010.00, 'Rechazado', '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"asdasd\",\"DNI\":\"123123\"}', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":29}]'),
-(14, 2, 'agustin', 'admin@admin.com', '2023-09-15 22:54:34', 202020.00, 'Rechazado', '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"asd\",\"DNI\":\"123\"}', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":\"29_Blanco_L\"},{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Negro\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":\"29_Negro_L\"}]'),
-(15, 2, 'agustin', 'admin@admin.com', '2023-09-15 22:55:53', 101010.00, 'Rechazado', '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"asd\",\"DNI\":\"123\"}', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":29}]'),
-(16, 2, 'agustin', 'admin@admin.com', '2023-09-15 23:37:53', 101010.00, 'Rechazado', '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"asdsasd\",\"DNI\":\"321231\"}', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":29}]'),
-(17, 2, 'agustin', 'admin@admin.com', '2023-09-18 15:41:33', 101010.00, 'Rechazado', '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"asd\",\"DNI\":\"123\"}', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":29}]'),
-(18, 2, 'agustin', 'admin@admin.com', '2023-09-18 16:25:14', 303030.00, 'Rechazado', '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"asd\",\"DNI\":\"123\"}', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"1\",\"id_producto\":\"29_Blanco_L\"},{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Negro\",\"Talla\":\"L\"},\"cantidad\":\"2\",\"id_producto\":\"29_Negro_L\"}]'),
-(19, 2, 'agustin', 'admin@admin.com', '2023-09-23 12:07:44', 202020.00, 'Aprobado', '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"asd\",\"DNI\":\"123\"}', '[{\"producto\":\"para borrar\",\"caracteristicas\":{\"Color\":\"Blanco\",\"Talla\":\"L\"},\"cantidad\":\"2\",\"id_producto\":\"29_Blanco_L\"}]');
+(20, 2, 'agustin', 'admin@admin.com', '2024-01-01 18:06:59', 5000.00, 'Aprobado', '{\"Entrega\":\"Retiro por el local\",\"Nombre\":\"Agustin Ackerman\",\"DNI\":\"41402558\"}', '[{\"producto\":\"Figura de Hulk\",\"caracteristicas\":{\"Talla\":\"Grande (50x50)\",\"Color\":\"Pintado\"},\"cantidad\":\"1\",\"id_producto\":\"48_Grande (50x50)_Pintado\"}]'),
+(21, 2, 'agustin', 'admin@admin.com', '2024-01-01 18:07:07', 10000.00, 'Rechazado', '{\"Entrega\":\"Envio a domicilio\",\"Nombre\":\"Agustin Ackerman\",\"Telefono\":\"2964405759\",\"Ciudad\":\"Rio Grande\",\"Calle\":\"Ohiggins\",\"Altura\":\"946\",\"Depto\":\"\",\"Codigo Postal\":\"9420\"}', '[{\"producto\":\"Figura de Hulk\",\"caracteristicas\":{\"Talla\":\"Mediano (30x30)\",\"Color\":\"Pintado\"},\"cantidad\":\"2\",\"id_producto\":\"48_Mediano (30x30)_Pintado\"}]');
 
 --
 -- Índices para tablas volcadas
@@ -313,6 +307,12 @@ ALTER TABLE `caracteristicas`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id_categoria`);
+
+--
+-- Indices de la tabla `categorias_papel`
+--
+ALTER TABLE `categorias_papel`
+  ADD PRIMARY KEY (`id_cat_papel`);
 
 --
 -- Indices de la tabla `combinaciones_producto`
@@ -348,6 +348,12 @@ ALTER TABLE `subcategorias`
   ADD KEY `id_categoria` (`id_categoria`);
 
 --
+-- Indices de la tabla `subcategorias_papel`
+--
+ALTER TABLE `subcategorias_papel`
+  ADD PRIMARY KEY (`id_subcat_papel`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -367,43 +373,55 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `caracteristicas`
 --
 ALTER TABLE `caracteristicas`
-  MODIFY `id_caracteristica` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_caracteristica` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `categorias_papel`
+--
+ALTER TABLE `categorias_papel`
+  MODIFY `id_cat_papel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10002;
 
 --
 -- AUTO_INCREMENT de la tabla `combinaciones_producto`
 --
 ALTER TABLE `combinaciones_producto`
-  MODIFY `id_combinacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_combinacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de la tabla `reservas_stock`
 --
 ALTER TABLE `reservas_stock`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `subcategorias`
 --
 ALTER TABLE `subcategorias`
-  MODIFY `id_subcategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_subcategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT de la tabla `subcategorias_papel`
+--
+ALTER TABLE `subcategorias_papel`
+  MODIFY `id_subcat_papel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10001;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -415,7 +433,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Restricciones para tablas volcadas
