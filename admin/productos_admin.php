@@ -9,9 +9,7 @@ session_start();
     require '../app/conexion.php';
 
     // Mostrar lista de productos con nombres de categorías y subcategorías
-    $sql = "SELECT productos.*, categorias.nombre_categoria, subcategorias.nombre_subcategoria FROM productos
-        INNER JOIN categorias ON productos.id_categoria = categorias.id_categoria
-        INNER JOIN subcategorias ON productos.id_subcategoria = subcategorias.id_subcategoria";
+    $sql = "SELECT * FROM productos";
     $stmt = $conexion->query($sql);
     $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -38,8 +36,6 @@ session_start();
                         <th>Imagen</th>
                         <th>Nombre</th>
                         <th>Precio</th>
-                        <th>Categoría</th>
-                        <th>Subcategoría</th>
                         <th>Stock</th>
                         <th>Acciones</th>
                     </tr>
@@ -50,8 +46,6 @@ session_start();
                             <td><img src="<?php echo $producto['imagen'] ?>" alt="" style="height: 50px; width: 50px;" ></td>
                             <td><?php echo $producto['nombre'] ?></td>
                             <td><?php echo $producto['precio'] ?></td>
-                            <td><?php echo $producto['nombre_categoria'] ?></td>
-                            <td><?php echo $producto['nombre_subcategoria'] ?></td>
                             <td><?php echo $producto['stock'] ?></td>
                             <td>
                                 <a href="editar_producto.php?id=<?php echo $producto['id'] ?>">Editar</a>

@@ -81,6 +81,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $imagen4 = '';
     }
 
+    // Verificar si se seleccionó 3D, Sticker o Papelería
+    $is_3d = 0; // Valor por defecto
+    if (isset($_POST['is_3d'])) {
+        $selected_options = $_POST['is_3d'];
+        if (in_array('1', $selected_options)) {
+            $is_3d = 1;
+        }
+        // Puedes seguir este patrón para las otras opciones (Sticker y Papelería)
+        if (in_array('2', $selected_options)) {
+            $is_3d = 2;
+        }
+        if (in_array('3', $selected_options)) {
+            $is_3d = 3;
+        }
+    }
+
     // Insertar nuevo producto en la base de datos
     $sql = "INSERT INTO productos (nombre, descripcion, precio, id_categoria, id_subcategoria, stock, imagen, imagen2, imagen3, imagen4, is_3d) VALUES (:nombre, :descripcion, :precio, :categoria, :subcategoria, :stock, :imagen, :imagen2, :imagen3, :imagen4, :is_3d)";
     $stmt = $conexion->prepare($sql);
@@ -95,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ':imagen2' => $imagen2,
         ':imagen3' => $imagen3,
         ':imagen4' => $imagen4,
-        ':is_3d' => isset($_POST['is_3d']) ? 1 : 0,
+        ':is_3d' => $is_3d
     ]);
 
     // Recuperar el ID del producto recién insertado
@@ -145,6 +161,11 @@ $resultado_categorias = $conexion->query($sql_categorias);
 $sql_subcategorias = "SELECT * FROM subcategorias";
 $resultado_subcategorias = $conexion->query($sql_subcategorias);
 
+$sql_categorias_papel = "SELECT * FROM categorias_papel";
+$resultado_categorias_papel = $conexion->query($sql_categorias_papel);
+
+$sql_subcategorias_papel = "SELECT * FROM subcategorias_papel";
+$resultado_subcategorias_papel = $conexion->query($sql_subcategorias_papel);
 ?>
 
 <!DOCTYPE html>
@@ -179,6 +200,9 @@ $resultado_subcategorias = $conexion->query($sql_subcategorias);
                     <?php foreach ($resultado_categorias as $categoria) { ?>
                         <option value="<?php echo $categoria['id_categoria'] ?>"><?php echo $categoria['nombre_categoria'] ?></option>
                     <?php } ?>
+                    <?php foreach ($resultado_categorias_papel as $categoria_papel) { ?>
+                        <option value="<?php echo $categoria_papel['id_cat_papel'] ?>"><?php echo $categoria_papel['nombre_cat_papel'] ?></option>
+                    <?php } ?>
                 </select><br>
 
                 <label for="subcategoria" style="font-weight: bold;">Subcategoría:</label>
@@ -186,6 +210,9 @@ $resultado_subcategorias = $conexion->query($sql_subcategorias);
                     <option value="">Selecciona una subcategoría</option>
                     <?php foreach ($resultado_subcategorias as $subcategoria) { ?>
                         <option value="<?php echo $subcategoria['id_subcategoria'] ?>" data-categoria="<?php echo $subcategoria['id_categoria'] ?>"><?php echo $subcategoria['nombre_subcategoria'] ?></option>
+                    <?php } ?>
+                    <?php foreach ($resultado_subcategorias_papel as $subcategoria_papel) { ?>
+                        <option value="<?php echo $subcategoria_papel['id_subcat_papel'] ?>" data-categoria="<?php echo $subcategoria_papel['id_cat_papel'] ?>"><?php echo $subcategoria_papel['nombre_subcat_papel'] ?></option>
                     <?php } ?>
                 </select><br>
 
@@ -201,8 +228,10 @@ $resultado_subcategorias = $conexion->query($sql_subcategorias);
                 <label for="imagen4" style="font-weight: bold;">Imagen 4 (opcional):</label>
                 <input type="file" name="imagen4" id="imagen4" accept="image/*"><br>
 
-                <label for="is_3d" style="font-weight: bold;">¿Es un producto 3D?</label>
-                <input type="checkbox" name="is_3d" id="is_3d" value="1">
+                <label style="font-weight: bold;">¿Qué tipo de producto es?</label><br>
+                <input type="checkbox" name="is_3d[]" value="1"> 3D<br>
+                <input type="checkbox" name="is_3d[]" value="2"> Sticker<br>
+                <input type="checkbox" name="is_3d[]" value="3"> Papelería<br>
 
                 <h3 style="margin-bottom: 5px; font-weight: bold;">Características:</h3>
                 <div id="contenedorCaracteristicas">

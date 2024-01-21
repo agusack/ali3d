@@ -38,7 +38,7 @@
     <h2>Productos 3D</h2>
     <div class="productos-list">
       <?php
-      $query = "SELECT * FROM `productos` WHERE `is_3d` = 1 LIMIT 6";
+      $query = "SELECT * FROM `productos` WHERE `is_3d` = '1' LIMIT 6";
       $resultado = mysqli_query($conexion, $query);
 
         while ($producto = mysqli_fetch_array($resultado)) {
@@ -64,7 +64,7 @@
           </a>
         </div>
         <div id="seccion_sticker" class="div2">
-          <a href="app/tienda.php?is_3d=0">
+          <a href="app/tienda.php?is_3d=2">
             <div><p>Visita nuestra sección <br>Stickers</p></div>
           </a>
         </div>
@@ -80,7 +80,7 @@
     <h2>Stickers</h2>
     <div class="productos-list">
       <?php
-      $query2 = "SELECT * FROM `productos` WHERE 'is_3d' = 0 LIMIT 6";
+      $query2 = "SELECT * FROM `productos` WHERE `is_3d` = '2' LIMIT 6";
       $resultado2 = mysqli_query($conexion, $query2);
 
       while ($producto2 = mysqli_fetch_array($resultado2)) {

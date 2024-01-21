@@ -11,7 +11,7 @@ require('funciones.php');
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Tienda online</title>
+  <title>Papelería - ALI3D</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -28,41 +28,29 @@ require('funciones.php');
   <button id="toggle-menu">☰</button>
     <div id="menu" class="col-md-2">
     <div class="list-group">
-      <div id="filter">
-        <h4>FILTROS</h4>
-        <form onsubmit="return false;">
-          <div>
-            <label for="is_3d_1">Filtrar por 3D</label>
-            <input type="checkbox" name="is_3d_1" id="is_3d_1" <?php echo (isset($_GET['is_3d']) && $_GET['is_3d'] === '1') ? 'checked' : ''; ?> onclick="actualizarFiltro3D('1');">
-          </div>
-          <div>
-            <label for="is_3d_0">Filtrar por Sticker</label>
-            <input type="checkbox" name="is_3d_2" id="is_3d_2" <?php echo (isset($_GET['is_3d']) && $_GET['is_3d'] === '0') ? 'checked' : ''; ?> onclick="actualizarFiltro3D('2');">
-          </div>
-        </form>
-      </div>
       <h4>CATEGORÍAS</h4>
       <?php
+
         // Obtener el valor de is_3d, si se especifica en la URL
         $is_3d = isset($_GET['is_3d']) ? $_GET['is_3d'] : '';
 
-        $query_categorias = "SELECT id_categoria, nombre_categoria FROM categorias";
+        $query_categorias = "SELECT id_cat_papel, nombre_cat_papel FROM categorias_papel";
         $result_categorias = mysqli_query($conexion, $query_categorias);
 
         while ($categoria = mysqli_fetch_assoc($result_categorias)) {
-            $enlace_categoria = "tienda.php?categoria=" . $categoria['id_categoria'];
+            $enlace_categoria = "tienda_papel.php?categoria=" . $categoria['id_cat_papel'];
             // Mantener el parámetro is_3d
             $enlace_categoria .= ($is_3d !== '') ? "&is_3d=$is_3d" : '';
-            echo '<a href="' . $enlace_categoria . '" class="list-group-item" id="main-category">' . $categoria['nombre_categoria'] . '</a>';
+            echo '<a href="' . $enlace_categoria . '" class="list-group-item" id="main-category">' . $categoria['nombre_cat_papel'] . '</a>';
 
-            $query_subcategorias = "SELECT id_subcategoria, nombre_subcategoria FROM subcategorias WHERE id_categoria=" . $categoria['id_categoria'];
+            $query_subcategorias = "SELECT id_subcat_papel, nombre_subcat_papel FROM subcategorias_papel WHERE id_cat_papel=" . $categoria['id_cat_papel'];
             $result_subcategorias = mysqli_query($conexion, $query_subcategorias);
 
             while ($subcategoria = mysqli_fetch_assoc($result_subcategorias)) {
-                $enlace_subcategoria = "tienda.php?categoria=" . $categoria['id_categoria'] . '&subcategoria=' . $subcategoria['id_subcategoria'];
+                $enlace_subcategoria = "tienda_papel.php?categoria=" . $categoria['id_cat_papel'] . '&subcategoria=' . $subcategoria['id_subcat_papel'];
                 // Mantener el parámetro is_3d
                 $enlace_subcategoria .= ($is_3d !== '') ? "&is_3d=$is_3d" : '';
-                echo '<a href="' . $enlace_subcategoria . '" class="list-group-item" id="sub-category">' . $subcategoria['nombre_subcategoria'] . '</a>';
+                echo '<a href="' . $enlace_subcategoria . '" class="list-group-item" id="sub-category">' . $subcategoria['nombre_subcat_papel'] . '</a>';
             }
         }
       ?>
@@ -143,12 +131,12 @@ require('funciones.php');
 
       // Construir el enlace para la página anterior
       $pagina_anterior = $pagina_actual - 1;
-      $enlace_anterior = ($pagina_anterior > 1) ? "tienda.php?pagina=$pagina_anterior&is_3d=$is_3d" : "tienda.php?pagina=1&is_3d=$is_3d";
+      $enlace_anterior = ($pagina_anterior > 1) ? "tienda_papel.php?pagina=$pagina_anterior&is_3d=$is_3d" : "tienda_papel.php?pagina=1&is_3d=$is_3d";
       echo "<a href='$enlace_anterior'>Anterior</a>";
 
       // Construir los enlaces para las páginas intermedias
       for ($i = 1; $i <= $total_paginas; $i++) {
-          $enlace_pagina = "tienda.php?pagina=$i&is_3d=$is_3d";
+          $enlace_pagina = "tienda_papel.php?pagina=$i&is_3d=$is_3d";
           if ($i == $pagina_actual) {
               echo "<span class='current'>$i</span>";
           } else {
@@ -158,7 +146,7 @@ require('funciones.php');
 
       // Construir el enlace para la página siguiente
       $pagina_siguiente = $pagina_actual + 1;
-      $enlace_siguiente = ($pagina_siguiente <= $total_paginas) ? "tienda.php?pagina=$pagina_siguiente&is_3d=$is_3d" : "tienda.php?pagina=$total_paginas&is_3d=$is_3d";
+      $enlace_siguiente = ($pagina_siguiente <= $total_paginas) ? "tienda_papel.php?pagina=$pagina_siguiente&is_3d=$is_3d" : "tienda_papel.php?pagina=$total_paginas&is_3d=$is_3d";
       echo "<a href='$enlace_siguiente'>Siguiente</a>";
     ?>
 </div>

@@ -2,8 +2,9 @@
   <section id="conteiner_footer">
   <div class="nosotros">
     <p class="titulo">NAVEGACIÓN</p>
-    <a href=""><p class="nos_detalles">Objetos 3D</p></a>
-    <a href=""><p class="nos_detalles">Stickers</p></a>
+    <a href="/ali3d/app/tienda.php?is_3d=1"><p class="nos_detalles">Impresión 3D</p></a>
+    <a href="/ali3d/app/tienda.php?is_3d=2"><p class="nos_detalles">Stickers</p></a>
+    <a href="/ali3d/app/tienda_papel.php?is_3d=3"><p class="nos_detalles">Papelería</p></a>
     <p class="nos_detalles"><i class="fa-brands fa-whatsapp"></i> 2964-405759</p>
   </div>
   <div class="medio">
@@ -16,7 +17,7 @@
     <div id="icons">
       <button><i class="fa-brands fa-facebook"></i></button>
       <button><i class="fa-brands fa-instagram"></i></button>
-      <button><i class="fa-brands fa-x-twitter"></i></button>
+      <button><i class="fa-brands fa-threads"></i></button>
     </div>
   </div>
   </section>

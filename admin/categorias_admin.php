@@ -13,6 +13,10 @@
     $sql = mysqli_query($conexion, "SELECT * FROM categorias");
     $sql_subcategorias = mysqli_query($conexion, "SELECT * FROM subcategorias");
 
+     //Consulta SQL para obtener las categorías papelería
+     $sql_2 = mysqli_query($conexion, "SELECT * FROM categorias_papel");
+     $sql_subcategorias_2 = mysqli_query($conexion, "SELECT * FROM subcategorias_papel");
+ 
 ?>
 
 <!DOCTYPE html>
@@ -97,6 +101,47 @@
                     echo "<td>" . $fila['nombre_subcategoria'] . "</td>";
                     echo "<td>" . $fila['id_categoria'] . "</td>";
                     echo "<td><a href='editar_subcategoria.php?id_subcategoria=" . $fila['id_subcategoria'] . "'>Editar</a> <a href='eliminar_subcategoria.php?id_subcategoria=" . $fila['id_subcategoria'] . "' onclick='return confirm(\"¿Estás seguro?\")'>Eliminar</a></td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+                ?>
+            </div>
+
+            <div class="tabla-container-2">
+                <h2 class="titulo-tabla">categorías papelería</h2>
+                <?php
+                //Mostramos las categorías en una tabla
+                echo "<table>";
+                echo "<td><a href='añadir_cat_papel.php' class='agregar-button'>Agregar Categoría</a></td>";
+                echo "<tr>"; 
+                echo "<th>ID Categoría</th>";
+                echo "<th>Nombre Categoría</th>";
+                echo "<th>Acciones</th>";
+                echo "</tr>";
+                while ($fila = mysqli_fetch_array($sql_2)) {
+                    echo "<tr>";
+                    echo "<td>" . $fila['id_cat_papel'] . "</td>";
+                    echo "<td>" . $fila['nombre_cat_papel'] . "</td>";
+                    echo "<td><a href='editar_cat_papel.php?id_categoria=" . $fila['id_cat_papel'] . "'>Editar</a> <a href='eliminar_cat_papel.php?id_categoria=" . $fila['id_cat_papel'] . "' onclick='return confirm(\"¿Estás seguro?\")'>Eliminar</a></td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+
+                //Mostramos las subcategorías en una tabla
+                echo "<h2>Subcategorías</h2>";
+                echo "<table>";
+                echo "<td><a href='añadir_subcat_papel.php' class='agregar-button'>Agregar Subcategoría</a></td>";
+                echo "<tr>";
+                echo "<th>ID Subcategoría</th>";
+                echo "<th>Nombre Subcategoría</th>";
+                echo "<th>ID Categoría</th>";
+                echo "</tr>";
+                while ($fila = mysqli_fetch_array($sql_subcategorias_2)) {
+                    echo "<tr>";
+                    echo "<td>" . $fila['id_subcat_papel'] . "</td>";
+                    echo "<td>" . $fila['nombre_subcat_papel'] . "</td>";
+                    echo "<td>" . $fila['id_cat_papel'] . "</td>";
+                    echo "<td><a href='editar_subcat_papel.php?id_subcategoria=" . $fila['id_subcat_papel'] . "'>Editar</a> <a href='eliminar_subcat_papel.php?id_subcategoria=" . $fila['id_subcat_papel'] . "' onclick='return confirm(\"¿Estás seguro?\")'>Eliminar</a></td>";
                     echo "</tr>";
                 }
                 echo "</table>";

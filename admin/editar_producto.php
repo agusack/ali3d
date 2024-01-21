@@ -47,6 +47,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $imagen4 = uploadImage($_FILES['imagen4']);
     }
 
+    // Obtener los valores de is_3d del formulario (checkbox)
+    $is_3d_values = isset($_POST['is_3d']) ? $_POST['is_3d'] : array();
+
+    // Convertir los valores a cadena y almacenar en la base de datos
+    $is_3d = implode(',', $is_3d_values);
+
+
     // Actualizar producto en la base de datos
     $sql = "UPDATE productos SET nombre = :nombre, descripcion = :descripcion, precio = :precio, id_categoria = :categoria, id_subcategoria = :subcategoria, stock = :stock, imagen = :imagen, imagen2 = :imagen2, imagen3 = :imagen3, imagen4 = :imagen4, is_3d = :is_3d WHERE id = :id";
 
@@ -63,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ':imagen2' => $imagen2,
         ':imagen3' => $imagen3,
         ':imagen4' => $imagen4,
-        ':is_3d' => isset($_POST['is_3d']) ? 1 : 0  // Verifica si el checkbox está marcado
+        ':is_3d' => $is_3d
     ]);
 
     // Actualizar características existentes
@@ -157,6 +164,18 @@ $stmt_subcategorias = $conexion->prepare($sql_subcategorias);
 $stmt_subcategorias->execute();
 $subcategorias = $stmt_subcategorias->fetchAll(PDO::FETCH_ASSOC);
 
+// Obtener nuevas categorías de papel
+$sql_categorias_papel = "SELECT * FROM categorias_papel";
+$stmt_categorias_papel = $conexion->prepare($sql_categorias_papel);
+$stmt_categorias_papel->execute();
+$categorias_papel = $stmt_categorias_papel->fetchAll(PDO::FETCH_ASSOC);
+
+// Obtener nuevas subcategorías de papel
+$sql_subcategorias_papel = "SELECT * FROM subcategorias_papel";
+$stmt_subcategorias_papel = $conexion->prepare($sql_subcategorias_papel);
+$stmt_subcategorias_papel->execute();
+$subcategorias_papel = $stmt_subcategorias_papel->fetchAll(PDO::FETCH_ASSOC);
+
 // Obtener combinaciones únicas actuales
 $sql_combinaciones = "SELECT id_combinacion, combinacion_unica, stock FROM combinaciones_producto WHERE id_producto = :id";
 $stmt_combinaciones = $conexion->prepare($sql_combinaciones);
@@ -203,15 +222,25 @@ $caracteristicas = $stmt_caracteristicas->fetchAll(PDO::FETCH_ASSOC);
 
                 <label for="categoria">Categoría:</label>
                 <select name="categoria" id="categoria">
-                    <?php foreach($categorias as $categoria): ?>
-                        <option value="<?php echo $categoria['id_categoria'] ?>"<?php if($categoria['id_categoria'] == $row['id_categoria']): ?> selected<?php endif; ?>><?php echo $categoria['nombre_categoria'] ?></option>
+                    <?php foreach ($categorias as $categoria): ?>
+                        <option value="<?php echo $categoria['id_categoria'] ?>" <?php if ($categoria['id_categoria'] == $row['id_categoria']) echo 'selected'; ?>><?php echo $categoria['nombre_categoria'] ?></option>
+                    <?php endforeach; ?>
+
+                    <!-- Agregar las nuevas categorías de papel -->
+                    <?php foreach ($categorias_papel as $categoria_papel): ?>
+                        <option value="<?php echo $categoria_papel['id_cat_papel'] ?>" <?php if ($categoria_papel['id_cat_papel'] == $row['id_categoria']) echo 'selected'; ?>><?php echo $categoria_papel['nombre_cat_papel'] ?></option>
                     <?php endforeach; ?>
                 </select><br>
 
                 <label for="subcategoria">Subcategoría:</label>
                 <select name="subcategoria" id="subcategoria">
-                    <?php foreach($subcategorias as $subcategoria): ?>
-                        <option value="<?php echo $subcategoria['id_subcategoria'] ?>"<?php if($subcategoria['id_subcategoria'] == $row['id_subcategoria']): ?> selected<?php endif; ?>><?php echo $subcategoria['nombre_subcategoria'] ?></option>
+                    <?php foreach ($subcategorias as $subcategoria): ?>
+                        <option value="<?php echo $subcategoria['id_subcategoria'] ?>" <?php if ($subcategoria['id_subcategoria'] == $row['id_subcategoria']) echo 'selected'; ?>><?php echo $subcategoria['nombre_subcategoria'] ?></option>
+                    <?php endforeach; ?>
+
+                    <!-- Agregar las nuevas subcategorías de papel -->
+                    <?php foreach ($subcategorias_papel as $subcategoria_papel): ?>
+                        <option value="<?php echo $subcategoria_papel['id_subcat_papel'] ?>" <?php if ($subcategoria_papel['id_subcat_papel'] == $row['id_subcategoria']) echo 'selected'; ?>><?php echo $subcategoria_papel['nombre_subcat_papel'] ?></option>
                     <?php endforeach; ?>
                 </select><br>
 
@@ -261,8 +290,17 @@ $caracteristicas = $stmt_caracteristicas->fetchAll(PDO::FETCH_ASSOC);
                 <input type="hidden" name="imagen3" value="<?php echo $row['imagen3'] ?>">
                 <input type="hidden" name="imagen4" value="<?php echo $row['imagen4'] ?>">
 
-                <label for="is_3d" style="font-weight: bold;">¿Es un producto 3D?</label>
-                <input type="checkbox" name="is_3d" id="is_3d" value="1" <?php if ($row['is_3d'] == 1) echo 'checked'; ?>>
+                <!-- HTML del formulario -->
+                <label style="font-weight: bold;">¿Qué tipo de producto es?</label><br>
+                <input type="checkbox" name="is_3d[]" id="is_3d_3d" value="1" <?php if (in_array('1', explode(',', $row['is_3d']))) echo 'checked'; ?>>
+                <label for="is_3d_3d">3D</label>
+
+                <input type="checkbox" name="is_3d[]" id="is_3d_sticker" value="2" <?php if (in_array('2', explode(',', $row['is_3d']))) echo 'checked'; ?>>
+                <label for="is_3d_sticker">Sticker</label>
+
+                <input type="checkbox" name="is_3d[]" id="is_3d_papeleria" value="3" <?php if (in_array('3', explode(',', $row['is_3d']))) echo 'checked'; ?>>
+                <label for="is_3d_papeleria">Papelería</label>
+
 
 
                 <h3 style="margin-top: 20px; margin-bottom: 5px; font-weight: bold;">Características existentes:</h3>
