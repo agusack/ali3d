@@ -256,7 +256,7 @@
       </div>
     </div>
     <div>
-      <a href="https://wa.me/542964606542?text=Hola%20como%20estas%3F%0A" class="button_subnav">Contacto</a>
+      <a href="https://wa.me/542964408658?text=Hola%20como%20estas%3F%0A" target="_blank" class="button_subnav">Contacto</a>
     </div>
 </div>
 </div>

@@ -105,7 +105,7 @@
           </a>
         </div>
         <div id="seccion_contacto" class="div3">
-          <a href="">
+          <a href="https://wa.me/542964408658?text=Hola%20como%20estas%3F%0A" target="_blank">
             <div><p>¿Tenés una idea? contactate con nosotros</p></div>
           </a>
         </div>
