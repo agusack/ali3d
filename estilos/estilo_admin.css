@@ -244,6 +244,50 @@ input[type="submit"]:hover {
     display: none;
   }
 
+  #conteiner_tool {
+    padding: 2rem 10rem 0rem 10rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  }
+
+  .tool_btn {
+    width: 200px;
+    height: 100px;
+    background-color: var(--azul_3);
+    border-radius: 15px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .tool_btn:hover {
+    background-color: var(--negro);
+  }
+
+  .tool_btn a {
+    width: 100%;
+    height: 100px;
+  }
+
+  .tool_btn div {
+    width: 100%;
+    height: 100%;
+  }
+
+  .tool_btn p {
+    font-size: 20px;
+    color: var(--negro);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 90px;
+  }
+
+  .tool_btn p:hover {
+    color: var(--blanco);
+  }
+
   @media (max-width: 768px) {
 
     .container_card {

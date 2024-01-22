@@ -95,3 +95,24 @@ html {
   .card-button:hover {
     background-color: var(--azul_3);
   }
+
+  .old-price {
+    text-decoration:line-through;
+    font-size: 1rem;
+    color: grey;
+    margin-right: 1rem;
+  }
+
+  #descuento {
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+    background-color: #23d160;
+    text-align: center;
+    line-height: 3rem;
+    color: var(--blanco);
+    font-size: 1.5rem;
+    margin-top: -22rem;
+    margin-left: 10rem;
+  }

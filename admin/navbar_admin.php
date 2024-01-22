@@ -8,7 +8,7 @@
         <a href="categorias_admin.php"><i class="fa-solid fa-tag"></i> Categorías</a>
         <a href="usuarios_admin.php"><i class="fa-solid fa-user"></i> Usuarios</a>
         <a href="ventas_admin.php"><i class="fa-solid fa-sack-dollar"></i> Ventas</a>
-        <a href="limpiar_reservas.php"><i class="fa-solid fa-sack-dollar"></i> Limiar Reservas</a>
+        <a href="herramientas_admin.php"><i class="fa-solid fa-screwdriver-wrench"></i> Herramientas</a>
     </div>
         <a href="../app/tienda.php"><i class="fa-solid fa-cart-shopping"></i> Volver a la tienda</a>
 </div>

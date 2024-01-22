@@ -29,8 +29,35 @@
     include('app/navbar.php');
   ?>
   <section id="page">
-  <div id="hero">
-    <h1>Impresión 3D <br> y Stickers <br> a tu Estilo</h1>
+  <!-- Sección del slider con imágenes -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicadores del slider -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <!-- Imágenes del slider -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="img/banner/hero.png" alt="Slide 1" class="slider-img">
+      </div>
+      <div class="item">
+        <img src="img/banner/banner.png" alt="Slide 2" class="slider-img">
+      </div>
+      <div class="item">
+        <img src="img/banner/banner.png" alt="Slide 3" class="slider-img">
+      </div>
+    </div>
+    <!-- Controles del slider -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Anterior</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Siguiente</span>
+    </a>
   </div>
   <section id="conteiner_index">
   <!-- Sección de productos 3D -->
@@ -41,18 +68,27 @@
       $query = "SELECT * FROM `productos` WHERE `is_3d` = '1' LIMIT 6";
       $resultado = mysqli_query($conexion, $query);
 
-        while ($producto = mysqli_fetch_array($resultado)) {
-          echo "<div class='card'><a href='app/producto.php?id=". $producto['id'] . "'>";
+      while ($producto = mysqli_fetch_array($resultado)) {
+          echo "<div class='card'><a href='app/producto.php?id=" . $producto['id'] . "'>";
           echo "<div class='card-img'><img class='card-img' src='" . $producto['imagen'] . "' alt='" . $producto['nombre'] . "'></div>";
           echo "<div class='card-info'>";
           echo "<p class='text-title'>" . $producto['nombre'] . "</p>";
           echo "</div>";
           echo "<div class='card-footer'>";
-          echo "<span class='text-title'> $" . $producto['precio'] . "</span></a>";
-          echo "<a href='app/producto.php?id=". $producto['id'] . "'><div class='card-button'> Ver más";
+      
+          // Verificar si hay un precio anterior
+          if ($producto['precio_ant'] > 0) {
+              // Mostrar precio anterior tachado
+              echo "<span class='text-title old-price'>$" . $producto['precio_ant'] . "</span>";
+              echo "<div id='descuento'>-%</div>";
+          }
+      
+          // Mostrar precio actual
+          echo "<span class='text-title current-price'>$" . $producto['precio'] . "</span></a>";
+          echo "<a href='app/producto.php?id=" . $producto['id'] . "'><div class='card-button'> Ver más";
           echo "</div></a>";
           echo "</div></div>";
-        }
+      }
       ?>
     </div>
   </div>
@@ -60,7 +96,7 @@
   <div id="secciones" class="parent">
         <div id="seccion_3d" class="div1">
           <a href="app/tienda.php?is_3d=1">
-            <div><p>Visita nuestra sección <br>3D</p></div>
+            <div><p>Visita nuestra sección <br>Impresión 3D</p></div>
           </a>
         </div>
         <div id="seccion_sticker" class="div2">
@@ -80,18 +116,65 @@
     <h2>Stickers</h2>
     <div class="productos-list">
       <?php
-      $query2 = "SELECT * FROM `productos` WHERE `is_3d` = '2' LIMIT 6";
-      $resultado2 = mysqli_query($conexion, $query2);
+      $query = "SELECT * FROM `productos` WHERE `is_3d` = '2' LIMIT 6";
+      $resultado = mysqli_query($conexion, $query);
 
-      while ($producto2 = mysqli_fetch_array($resultado2)) {
-        echo "<div class='card'><a href='app/producto.php?id=". $producto2['id'] . "'>";
-        echo "<div class='card-img'><img class='card-img' src='" . $producto2['imagen'] . "' alt='" . $producto2['nombre'] . "'></div>";
+      while ($producto = mysqli_fetch_array($resultado)) {
+        echo "<div class='card'><a href='app/producto.php?id=" . $producto['id'] . "'>";
+        echo "<div class='card-img'><img class='card-img' src='" . $producto['imagen'] . "' alt='" . $producto['nombre'] . "'></div>";
         echo "<div class='card-info'>";
-        echo "<p class='text-title'>" . $producto2['nombre'] . "</p>";
+        echo "<p class='text-title'>" . $producto['nombre'] . "</p>";
         echo "</div>";
         echo "<div class='card-footer'>";
-        echo "<span class='text-title'> $" . $producto2['precio'] . "</span></a>";
-        echo "<a href='app/producto.php?id=". $producto2['id'] . "'><div class='card-button'> Ver más";
+    
+        // Verificar si hay un precio anterior
+        if ($producto['precio_ant'] > 0) {
+            // Mostrar precio anterior tachado
+            echo "<span class='text-title old-price'>$" . $producto['precio_ant'] . "</span>";
+            echo "<div id='descuento'>-%</div>";
+        }
+    
+        // Mostrar precio actual
+        echo "<span class='text-title current-price'>$" . $producto['precio'] . "</span></a>";
+        echo "<a href='app/producto.php?id=" . $producto['id'] . "'><div class='card-button'> Ver más";
+        echo "</div></a>";
+        echo "</div></div>";
+      }
+      ?>
+    </div>
+  </div>
+  <div id="papeleria">
+      <div>
+        <a href="app/tienda_papel.php?is_3d=3">
+          <div><p>Visita nuestra sección papelería</p></div>
+        </a>
+      </div>
+  </div>
+  <div class="papel-products">
+    <h2>Papelería</h2>
+    <div class="productos-list">
+      <?php
+      $query = "SELECT * FROM `productos` WHERE `is_3d` = '3' LIMIT 6";
+      $resultado = mysqli_query($conexion, $query);
+
+      while ($producto = mysqli_fetch_array($resultado)) {
+        echo "<div class='card'><a href='app/producto.php?id=" . $producto['id'] . "'>";
+        echo "<div class='card-img'><img class='card-img' src='" . $producto['imagen'] . "' alt='" . $producto['nombre'] . "'></div>";
+        echo "<div class='card-info'>";
+        echo "<p class='text-title'>" . $producto['nombre'] . "</p>";
+        echo "</div>";
+        echo "<div class='card-footer'>";
+    
+        // Verificar si hay un precio anterior
+        if ($producto['precio_ant'] > 0) {
+            // Mostrar precio anterior tachado
+            echo "<span class='text-title old-price'>$" . $producto['precio_ant'] . "</span>";
+            echo "<div id='descuento'>-%</div>";
+        }
+    
+        // Mostrar precio actual
+        echo "<span class='text-title current-price'>$" . $producto['precio'] . "</span></a>";
+        echo "<a href='app/producto.php?id=" . $producto['id'] . "'><div class='card-button'> Ver más";
         echo "</div></a>";
         echo "</div></div>";
       }

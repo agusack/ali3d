@@ -17,12 +17,24 @@ body {
   padding-top: 5rem;
 }
 
+#myCarousel {
+  background-color: var();
+  height: auto; /* cambiamos 'content' por 'auto' para que se adapte al contenido */
+}
+
+.slider-img {
+  width: 100%;
+  margin: auto;
+}
+
+/*
 #hero {
   width: 100%;
   height: 90rem;
   background-image: url(../img/banner/hero.png);
   background-size: cover;
 }
+
 
 #hero h1 {
   width: 100%;
@@ -35,7 +47,7 @@ body {
   -webkit-text-stroke-width: 2px;
   font-family: 'Bebas Neue', sans-serif;
 }
-
+*/
 
 .popular-products {
   background-image: url(../img/pattern/wave.svg);
@@ -51,10 +63,15 @@ body {
   background-repeat: no-repeat;
   background-position: 0%;
   margin-top: -2rem;
-  margin-bottom: 20rem;
+  margin-bottom: 10rem;
 }
 
-.popular-products h2, .new-products h2 {
+.papel-products {
+  margin-top: -2rem;
+  margin-bottom: 7rem;
+}
+
+.popular-products h2, .new-products h2, .papel-products h2 {
   width: 100%;
   display: flex;
   justify-content: start;
@@ -88,7 +105,7 @@ body {
 #seccion_3d div {
   height: 100%;
   width: 100%;
-  background: url(../img/3d.jpg);
+  background: url(../img/buttons/3d.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 1.5rem;
@@ -106,7 +123,7 @@ body {
 #seccion_sticker div {
   height: 100%;
   width: 100%;
-  background-image: url(../img/stickers.jpg);
+  background-image: url(../img/buttons/stickers.jpg);
   background-size: cover;
   border-radius: 1.5rem;
   display: flex;
@@ -122,7 +139,7 @@ body {
 #seccion_contacto div {
   height: 80%;
   width: 100%;
-  background-image: url(../img/idea.jpg);
+  background-image: url(../img/buttons/idea.jpg);
   background-size: cover;
   border-radius: 1.5rem;
   display: flex;
@@ -131,7 +148,7 @@ body {
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.6);
 }
 
-#seccion_contacto div p, #seccion_sticker div p, #seccion_3d div p   {
+#seccion_contacto div p, #seccion_sticker div p, #seccion_3d div p, #papeleria div p {
   font-size: 4rem;
   font-weight: bold;
   color: var(--blanco);
@@ -142,7 +159,7 @@ body {
   filter: drop-shadow(0px 5px 2px rgba(0, 0, 0, 1));
 }
 
-#seccion_3d div:hover, #seccion_sticker div:hover, #seccion_contacto div:hover {
+#seccion_3d div:hover, #seccion_sticker div:hover, #seccion_contacto div:hover, #papeleria div:hover {
   transform: translateY(0.1rem);
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.6);
 }
@@ -160,8 +177,34 @@ body {
   .div3 { grid-area: 2 / 1 / 3 / 3; }
 
 
+#papeleria {
+  width: 100%;
+  height: auto;
+  background-color: var(--blanco);
+  padding: 0rem 15rem 0rem 15rem;
+  margin-bottom: 10rem;
+}
+
+#papeleria div {
+  height: 30rem;
+  width: 100%;
+  background-image: url(../img/buttons/papeleria.png);
+  background-size: cover;
+  background-position: center;
+  border-radius: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.6);
+}
+
+#papeleria div a {
+  width: 100%;
+}
+
 @media screen and (max-width: 768px) {
 
+  /*
   #hero {
     width: 100%;
     height: 90vh;
@@ -177,6 +220,7 @@ body {
     justify-content: center;
     align-items: center;
   }
+  */
 
   .productos-list {
     grid-template-columns: repeat(2, 1fr); /* Mostrar 1 producto en celular */
