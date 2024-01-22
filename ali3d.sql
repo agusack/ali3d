@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-01-2024 a las 06:27:39
+-- Tiempo de generación: 22-01-2024 a las 06:30:21
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -152,31 +152,32 @@ CREATE TABLE `productos` (
   `imagen2` text NOT NULL,
   `imagen3` text NOT NULL,
   `imagen4` text NOT NULL,
-  `is_3d` int(1) NOT NULL
+  `is_3d` int(1) NOT NULL,
+  `precio_ant` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `id_categoria`, `id_subcategoria`, `stock`, `popular`, `imagen`, `imagen2`, `imagen3`, `imagen4`, `is_3d`) VALUES
-(33, 'Boca Juniors', 'Escudo Boca Juniors', 500.00, 14, 21, 0, 0, '/Viroco/img/productos/Boca.jpg', '', '', '', 2),
-(34, 'Mate de Boca', 'Mate de Boca en 3D', 2000.00, 14, 21, 50, 0, '/Viroco/img/productos/mate boca.jpg', '', '', '', 1),
-(35, 'River Plate', 'Escudo de River Plate', 500.00, 14, 22, 100, 0, '/Viroco/img/productos/riber escudo.jpg', '', '', '', 2),
-(36, 'Escudo de River', 'Escudo de River en 3D', 1500.00, 14, 22, 50, 0, '/Viroco/img/productos/riber.png', '', '', '', 1),
-(37, 'Hulk', 'Sticker de Hulk', 250.00, 15, 24, 100, 0, '/Viroco/img/productos/hulk2.jpg', '', '', '', 2),
-(38, 'Hello Kitty', 'Sticker de Hello Kitty', 300.00, 15, 26, 50, 0, '/Viroco/img/productos/kitty.jpg', '', '', '', 2),
-(39, 'Peppa Pig', 'Sticker de Peppa Pig', 150.00, 15, 26, 50, 0, '/Viroco/img/productos/pepa.jpg', '', '', '', 2),
-(40, 'Messi', 'Sticker de Messi ', 500.00, 14, 23, 500, 0, '/Viroco/img/productos/messi 2.jpg', '/Viroco/img/productos/messi.jpg', '', '', 2),
-(41, 'Homero Simpson', 'Sticker de Homer Simpson', 500.00, 15, 26, 20, 0, '/Viroco/img/productos/homero.jpg', '', '', '', 2),
-(42, 'Marvel', 'Sticker de Marvel', 100.00, 15, 24, 20, 0, '/Viroco/img/productos/marvel.jpg', '', '', '', 2),
-(43, 'Capitan America ', 'Stiker de Capitan America', 150.00, 15, 24, 50, 0, '/Viroco/img/productos/capitan america.jpg', '', '', '', 2),
-(44, 'Copa del mundo', 'Copa del mundo Argentina', 4000.00, 14, 23, 100, 0, '/Viroco/img/productos/copa del mundo.jpg', '', '', '', 3),
-(45, 'Hello kitty ', 'Hello Kitty ', 3000.00, 15, 26, 10, 0, '/Viroco/img/productos/kitty.jpg', '', '', '', 1),
-(46, 'Llavero Hello Kitty', 'Llavero de Hello Kitty ', 1000.00, 15, 26, 60, 0, '/Viroco/img/productos/kitty llavero.webp', '', '', '', 1),
-(47, 'Llavero de Argentina', 'Llavero de Argentina', 1000.00, 14, 23, 50, 0, '/Viroco/img/productos/Argentina.png', '', '', '', 1),
-(48, 'Figura de Hulk', 'Figura de Hulk en 3D', 5000.00, 15, 24, 113, 3, '/Viroco/img/productos/hulk.jpg', '', '', '', 1),
-(49, 'prueba papel', 'prueba papel', 123123.00, 10001, 10000, 0, 0, '/ali3d/img/productos/foto_producto.png', '', '', '', 3);
+INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `id_categoria`, `id_subcategoria`, `stock`, `popular`, `imagen`, `imagen2`, `imagen3`, `imagen4`, `is_3d`, `precio_ant`) VALUES
+(33, 'Boca Juniors', 'Escudo Boca Juniors', 600.00, 14, 21, 0, 0, '/Viroco/img/productos/Boca.jpg', '', '', '', 2, 550.00),
+(34, 'Mate de Boca', 'Mate de Boca en 3D', 1500.99, 14, 21, 50, 0, '/Viroco/img/productos/mate boca.jpg', '', '', '', 1, 2000.50),
+(35, 'River Plate', 'Escudo de River Plate', 598.95, 14, 22, 100, 0, '/Viroco/img/productos/riber escudo.jpg', '', '', '', 2, 0.00),
+(36, 'Escudo de River', 'Escudo de River en 3D', 600.00, 14, 22, 50, 0, '/Viroco/img/productos/riber.png', '', '', '', 1, 650.00),
+(37, 'Hulk', 'Sticker de Hulk', 299.48, 15, 24, 100, 0, '/Viroco/img/productos/hulk2.jpg', '', '', '', 2, 0.00),
+(38, 'Hello Kitty', 'Sticker de Hello Kitty', 359.37, 15, 26, 50, 0, '/Viroco/img/productos/kitty.jpg', '', '', '', 2, 0.00),
+(39, 'Peppa Pig', 'Sticker de Peppa Pig', 179.69, 15, 26, 50, 0, '/Viroco/img/productos/pepa.jpg', '', '', '', 2, 0.00),
+(40, 'Messi', 'Sticker de Messi ', 598.95, 14, 23, 500, 0, '/Viroco/img/productos/messi 2.jpg', '/Viroco/img/productos/messi.jpg', '', '', 2, 0.00),
+(41, 'Homero Simpson', 'Sticker de Homer Simpson', 598.95, 15, 26, 20, 0, '/Viroco/img/productos/homero.jpg', '', '', '', 2, 0.00),
+(42, 'Marvel', 'Sticker de Marvel', 119.79, 15, 24, 20, 0, '/Viroco/img/productos/marvel.jpg', '', '', '', 2, 0.00),
+(43, 'Capitan America ', 'Stiker de Capitan America', 179.69, 15, 24, 50, 0, '/Viroco/img/productos/capitan america.jpg', '', '', '', 2, 0.00),
+(44, 'Copa del mundo', 'Copa del mundo Argentina', 4791.60, 14, 23, 100, 0, '/Viroco/img/productos/copa del mundo.jpg', '', '', '', 3, 0.00),
+(45, 'Hello kitty ', 'Hello Kitty ', 3593.70, 15, 26, 10, 0, '/Viroco/img/productos/kitty.jpg', '', '', '', 1, 0.00),
+(46, 'Llavero Hello Kitty', 'Llavero de Hello Kitty ', 1197.90, 15, 26, 60, 0, '/Viroco/img/productos/kitty llavero.webp', '', '', '', 1, 0.00),
+(47, 'Llavero de Argentina', 'Llavero de Argentina', 1197.90, 14, 23, 50, 0, '/Viroco/img/productos/Argentina.png', '', '', '', 1, 0.00),
+(48, 'Figura de Hulk', 'Figura de Hulk en 3D', 5989.50, 15, 24, 113, 3, '/Viroco/img/productos/hulk.jpg', '', '', '', 1, 0.00),
+(49, 'prueba papel', 'prueba papel', 147489.05, 10001, 10000, 0, 0, '/ali3d/img/productos/foto_producto.png', '', '', '', 3, 0.00);
 
 -- --------------------------------------------------------
 
