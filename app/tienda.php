@@ -107,7 +107,7 @@ require('funciones.php');
 
             // Imprimir los resultados
             foreach ($productosMostrar as $producto) {
-              echo "<div class='card'><a href='app/producto.php?id=" . $producto['id'] . "'>";
+              echo "<div class='card'><a href='producto.php?id=" . $producto['id'] . "'>";
               echo "<div class='card-img'><img class='card-img' src='" . $producto['imagen'] . "' alt='" . $producto['nombre'] . "'></div>";
               echo "<div class='card-info'>";
               echo "<p class='text-title'>" . $producto['nombre'] . "</p>";
@@ -118,12 +118,12 @@ require('funciones.php');
               if ($producto['precio_ant'] > 0) {
                   // Mostrar precio anterior tachado
                   echo "<span class='text-title old-price'>$" . $producto['precio_ant'] . "</span>";
-                  echo "<div id='descuento'>-%</div>";
+                  echo "<div id='descuento'>%</div>";
               }
           
               // Mostrar precio actual
               echo "<span class='text-title current-price'>$" . $producto['precio'] . "</span></a>";
-              echo "<a href='app/producto.php?id=" . $producto['id'] . "'><div class='card-button'> Ver más";
+              echo "<a href='producto.php?id=" . $producto['id'] . "'><div class='card-button'> Ver más";
               echo "</div></a>";
               echo "</div></div>";
             }

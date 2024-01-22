@@ -184,7 +184,7 @@ button {
   display: none;
   flex-wrap: wrap;
   justify-content: left;
-  width: 30rem;
+  width: 50rem;
   height: content;
   left: -200%;
   top: 100%;

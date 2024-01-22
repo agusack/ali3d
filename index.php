@@ -80,7 +80,7 @@
           if ($producto['precio_ant'] > 0) {
               // Mostrar precio anterior tachado
               echo "<span class='text-title old-price'>$" . $producto['precio_ant'] . "</span>";
-              echo "<div id='descuento'>-%</div>";
+              echo "<div id='descuento'><i class='fa-solid fa-percent fa-shake'></i></div>";
           }
       
           // Mostrar precio actual
@@ -131,7 +131,7 @@
         if ($producto['precio_ant'] > 0) {
             // Mostrar precio anterior tachado
             echo "<span class='text-title old-price'>$" . $producto['precio_ant'] . "</span>";
-            echo "<div id='descuento'>-%</div>";
+            echo "<div id='descuento'><i class='fa-solid fa-percent fa-shake'></i></div>";
         }
     
         // Mostrar precio actual
@@ -169,7 +169,7 @@
         if ($producto['precio_ant'] > 0) {
             // Mostrar precio anterior tachado
             echo "<span class='text-title old-price'>$" . $producto['precio_ant'] . "</span>";
-            echo "<div id='descuento'>-%</div>";
+            echo "<div id='descuento'><i class='fa-solid fa-percent fa-shake'></i></div>";
         }
     
         // Mostrar precio actual

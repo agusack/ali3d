@@ -60,8 +60,9 @@ body {
 }
 
 .list-group h4 {
-  color: var(--blanco);
+  color: var(--negro);
   text-decoration: underline;
+  font-weight: bold;
 }
 
 #main-category {
