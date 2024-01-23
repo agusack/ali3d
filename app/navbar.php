@@ -118,6 +118,53 @@
     // Cerrar la conexión a la base de datos
     $conexion->close();
   }
+
+  function obtenerCategoriasSticker($conexion) {
+    // Hacer una consulta a la base de datos para obtener todas las categorías
+    $query = "SELECT * FROM categorias_sticker";
+    $result = mysqli_query($conexion, $query);
+  
+    // Crear un array vacío para almacenar las categorías principales
+    $categorias_principales = array();
+  
+    // Iterar sobre el resultado de la consulta
+    while ($row = mysqli_fetch_assoc($result)) {
+      // Crear un array que represente la categoría principal
+      $categoria = array(
+        'id' => $row['id_cat_sticker'],
+        'nombre' => $row['nombre_cat_sticker'],
+        'subcategorias' => array()
+      );
+  
+      // Agregar la categoría principal al array de categorías principales
+      $categorias_principales[$row['id_cat_sticker']] = $categoria;
+    }
+  
+    // Hacer una consulta a la base de datos para obtener todas las subcategorías
+    $query = "SELECT * FROM subcategorias_sticker";
+    $result = mysqli_query($conexion, $query);
+  
+    // Iterar sobre el resultado de la consulta
+    while ($row = mysqli_fetch_assoc($result)) {
+      // Si la subcategoría tiene una categoría superior, es una subcategoría de una categoría principal
+      if ($row['id_cat_sticker']) {
+        $subcategoria = array(
+          'id' => $row['id_subcat_sticker'],
+          'nombre' => $row['nombre_subcat_sticker']
+        );
+  
+        // Agregar la subcategoría a su categoría principal correspondiente
+        $categorias_principales[$row['id_cat_sticker']]['subcategorias'][] = $subcategoria;
+      }
+    }
+  
+    // Devolver el array de categorías principales
+    return $categorias_principales;
+  
+    // Cerrar la conexión a la base de datos
+    $conexion->close();
+  }
+
 ?>
 <div id="navbar">
 <nav>
@@ -194,20 +241,20 @@
       </div>
     </div>
     <div id="menuCategorias2" class="menu">
-      <a href="/ali3d/app/tienda.php?is_3d=2" class="button_subnav">Stickers</a>
+      <a href="/ali3d/app/tienda_sticker.php?is_3d=2" class="button_subnav">Stickers</a>
       <div class="menu-categorias" id="listaCategorias2">
-        <?php $categorias = obtenerCategorias($conexion); ?>
+        <?php $categorias = obtenerCategoriasSticker($conexion); ?>
         <?php foreach ($categorias as $categoria) : ?>
           <div class="categoria-principal">
             <p>
-              <a href="/ali3d/app/tienda.php?is_3d=2&categoria=<?php echo $categoria['id']; ?>">
+              <a href="/ali3d/app/tienda_sticker.php?is_3d=2&categoria=<?php echo $categoria['id']; ?>">
                 <?php echo $categoria['nombre']; ?>
               </a>
             </p>
             <ul class="subcategorias">
               <?php foreach ($categoria['subcategorias'] as $subcategoria) : ?>
                 <li>
-                  <a href="/ali3d/app/tienda.php?is_3d=2&categoria=<?php echo $categoria['id']; ?>&subcategoria=<?php echo $subcategoria['id']; ?>">
+                  <a href="/ali3d/app/tienda_sticker.php?is_3d=2&categoria=<?php echo $categoria['id']; ?>&subcategoria=<?php echo $subcategoria['id']; ?>">
                     <?php echo $subcategoria['nombre']; ?>
                   </a>
                   <?php if (!empty($subcategoria['productos'])): ?>
