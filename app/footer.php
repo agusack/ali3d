@@ -22,6 +22,6 @@
   </div>
   </section>
   <div id="copy">
-    <p>Hecho con <i class="fa-solid fa-heart fa-beat" style="color: #FCC9BD;"></i> por <a href="https://www.instagram.com/ackagus/?hl=es-la" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; color: #69A7EE;">@ackagus</a></p>
+    <p>Hecho con <i class="fa-solid fa-heart fa-beat" style="color: #FCC9BD;"></i> por <a href="https://www.linkedin.com/in/ackagus/" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; color: #69A7EE;">@ackagus</a></p>
   </div>
 </footer>
