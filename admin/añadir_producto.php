@@ -14,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $precio = $_POST['precio'];
     $categoria = $_POST['categoria'];
     $subcategoria = $_POST['subcategoria'];
-    $stock = $_POST['stockGeneral'];
 
     // Verifica si se ha seleccionado un archivo de imagen
     if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
@@ -98,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Insertar nuevo producto en la base de datos
-    $sql = "INSERT INTO productos (nombre, descripcion, precio, id_categoria, id_subcategoria, stock, imagen, imagen2, imagen3, imagen4, is_3d) VALUES (:nombre, :descripcion, :precio, :categoria, :subcategoria, :stock, :imagen, :imagen2, :imagen3, :imagen4, :is_3d)";
+    $sql = "INSERT INTO productos (nombre, descripcion, precio, id_categoria, id_subcategoria, imagen, imagen2, imagen3, imagen4, is_3d) VALUES (:nombre, :descripcion, :precio, :categoria, :subcategoria, :imagen, :imagen2, :imagen3, :imagen4, :is_3d)";
     $stmt = $conexion->prepare($sql);
     $stmt->execute([
         ':nombre' => $nombre_producto,
@@ -106,7 +105,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ':precio' => $precio,
         ':categoria' => $categoria,
         ':subcategoria' => $subcategoria,
-        ':stock' => $stock,
         ':imagen' => $imagen,
         ':imagen2' => $imagen2,
         ':imagen3' => $imagen3,
@@ -137,18 +135,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     foreach ($combinaciones as $combinacion) {
         $caracteristica_1 = $combinacion['caracteristica_1'];
         $caracteristica_2 = $combinacion['caracteristica_2'];
-        $stock_combinacion = $combinacion['stock'];
 
         // Aquí generas la combinación única con los nombres y valores seleccionados
         $combinacion_unica = "$caracteristica_1 - $caracteristica_2";
 
         // Insertas la combinación en la tabla "combinaciones_producto"
-        $sql_combinacion = "INSERT INTO combinaciones_producto (id_producto, combinacion_unica, stock) VALUES (:id_producto, :combinacion_unica, :stock)";
+        $sql_combinacion = "INSERT INTO combinaciones_producto (id_producto, combinacion_unica) VALUES (:id_producto, :combinacion_unica)";
         $stmt_combinacion = $conexion->prepare($sql_combinacion);
         $stmt_combinacion->execute([
             ':id_producto' => $id_producto,
             ':combinacion_unica' => $combinacion_unica,
-            ':stock' => $stock_combinacion,
         ]);
     }
 
@@ -157,15 +153,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 $sql_categorias = "SELECT * FROM categorias";
 $resultado_categorias = $conexion->query($sql_categorias);
-
 $sql_subcategorias = "SELECT * FROM subcategorias";
 $resultado_subcategorias = $conexion->query($sql_subcategorias);
 
+$sql_categorias_sticker = "SELECT * FROM categorias_sticker";
+$resultado_categorias_sticker = $conexion->query($sql_categorias_sticker);
+$sql_subcategorias_sticker = "SELECT * FROM subcategorias_sticker";
+$resultado_subcategorias_sticker = $conexion->query($sql_subcategorias_sticker);
+
 $sql_categorias_papel = "SELECT * FROM categorias_papel";
 $resultado_categorias_papel = $conexion->query($sql_categorias_papel);
-
 $sql_subcategorias_papel = "SELECT * FROM subcategorias_papel";
 $resultado_subcategorias_papel = $conexion->query($sql_subcategorias_papel);
+
 ?>
 
 <!DOCTYPE html>
@@ -197,23 +197,40 @@ $resultado_subcategorias_papel = $conexion->query($sql_subcategorias_papel);
                 <label for="categoria" style="font-weight: bold;">Categoría:</label>
                 <select name="categoria" id="categoria" onchange="actualizarSubcategorias()" required>
                     <option value="">Selecciona una categoría</option>
+                    <optgroup label="Impresión 3D">
                     <?php foreach ($resultado_categorias as $categoria) { ?>
                         <option value="<?php echo $categoria['id_categoria'] ?>"><?php echo $categoria['nombre_categoria'] ?></option>
                     <?php } ?>
+                    </optgroup>
+                    <optgroup label="Stickers">
+                    <?php foreach ($resultado_categorias_sticker as $categoria_sticker) { ?>
+                        <option value="<?php echo $categoria_sticker['id_cat_sticker'] ?>"><?php echo $categoria_sticker['nombre_cat_sticker'] ?></option>
+                    <?php } ?>
+                    </optgroup>
+                    <optgroup label="Papelería">
                     <?php foreach ($resultado_categorias_papel as $categoria_papel) { ?>
                         <option value="<?php echo $categoria_papel['id_cat_papel'] ?>"><?php echo $categoria_papel['nombre_cat_papel'] ?></option>
                     <?php } ?>
+                    </optgroup>
                 </select><br>
 
                 <label for="subcategoria" style="font-weight: bold;">Subcategoría:</label>
                 <select name="subcategoria" id="subcategoria" required>
                     <option value="">Selecciona una subcategoría</option>
+                    <optgroup label="Impresión 3D">
                     <?php foreach ($resultado_subcategorias as $subcategoria) { ?>
                         <option value="<?php echo $subcategoria['id_subcategoria'] ?>" data-categoria="<?php echo $subcategoria['id_categoria'] ?>"><?php echo $subcategoria['nombre_subcategoria'] ?></option>
                     <?php } ?>
+                    </optgroup>
+                    <optgroup label="Stickers">
+                    <?php foreach ($resultado_subcategorias_sticker as $subcategoria_sticker) { ?>
+                        <option value="<?php echo $subcategoria_sticker['id_subcat_sticker'] ?>" data-categoria="<?php echo $subcategoria_sticker['id_cat_sticker'] ?>"><?php echo $subcategoria_sticker['nombre_subcat_sticker'] ?></option>
+                    <?php } ?>
+                    <optgroup label="Papelería">
                     <?php foreach ($resultado_subcategorias_papel as $subcategoria_papel) { ?>
                         <option value="<?php echo $subcategoria_papel['id_subcat_papel'] ?>" data-categoria="<?php echo $subcategoria_papel['id_cat_papel'] ?>"><?php echo $subcategoria_papel['nombre_subcat_papel'] ?></option>
                     <?php } ?>
+                    </optgroup>
                 </select><br>
 
                 <label for="imagen" style="font-weight: bold;">Imagen 1:</label>
@@ -243,25 +260,6 @@ $resultado_subcategorias_papel = $conexion->query($sql_subcategorias_papel);
                         <!-- Aqui borre los inputs -->
                     </div>
                 </div>
-
-                <h3 style="margin-top: 20px; margin-bottom: 5px; font-weight: bold;">Combinaciones de características:</h3>
-                <div id="contenedorCombinaciones">
-                    <span class="agregar" onclick="agregarCampoCombinacion()" style="width: 50px; height: 50px; color: #fff; background-color: #45a049; cursor: pointer; padding: 5px; border: 1px solid #ccc;"><i class="fas fa-plus"></i> Agregar combinación</span>
-
-                    <!-- Campos de combinaciones -->
-                    <div class="campoCombinacion">
-                    </div>
-                </div>
-
-                <!-- Botón para agregar stock general -->
-                <h3 style="margin-top: 20px; margin-bottom: 5px; font-weight: bold;">Agregar stock general:</h3>
-                <span class="agregar" id="agregarStockGeneral" onclick="mostrarInputStockGeneral()" style="width: 50px; height: 50px; color: #fff; background-color: #45a049; cursor: pointer; padding: 5px; border: 1px solid #ccc;"><i class="fas fa-plus"></i> Agregar stock general</span>
-
-                <!-- Input de stock general oculto por defecto -->
-                <div id="contenedorStockGeneral" style="display: none;">
-                    <label for="stockGeneral" style="font-weight: bold;">Stock General:</label>
-                    <input type="number" name="stockGeneral" id="stockGeneral">
-                </div><br>
 
                 <input type="submit" value="Añadir" style="margin-top: 20px;">
             </form>
@@ -317,108 +315,5 @@ $resultado_subcategorias_papel = $conexion->query($sql_subcategorias_papel);
         campo.parentNode.removeChild(campo);
     }
 
-    function agregarCampoCombinacion() {
-        const contenedor = document.getElementById('contenedorCombinaciones');
-        const nuevoCampo = document.createElement('div');
-        nuevoCampo.className = 'campoCombinacion';
-        nuevoCampo.innerHTML = `
-            <select name="combinaciones[${contadorCombinaciones}][caracteristica_1]" required>
-                <option value="" disabled selected>Seleccionar característica 1</option>
-                ${generarOpcionesCaracteristicas(1)}
-            </select>
-            <select name="combinaciones[${contadorCombinaciones}][caracteristica_2]" required>
-                <option value="" disabled selected>Seleccionar característica 2</option>
-                ${generarOpcionesCaracteristicas(2)}
-            </select>
-            <input type="number" name="combinaciones[${contadorCombinaciones}][stock]" placeholder="Stock" required>
-            <span class="eliminar" onclick="eliminarCampoCombinacion(this)" style="width: 50px; height: 50px; color: #fff; background-color: #cc0000; cursor: pointer; padding: 5px; border: 1px solid #ccc;"><i class="fas fa-trash"></i> Eliminar caracteristica</span>
-        `;
-        contenedor.appendChild(nuevoCampo);
-        contadorCombinaciones++;
-    }
-
-    function eliminarCampoCombinacion(el) {
-        const campo = el.parentNode;
-        campo.parentNode.removeChild(campo);
-    }
-
-    // Función para generar las opciones de características dinámicamente
-    function generarOpcionesCaracteristicas(numCaracteristica) {
-        let opciones = '';
-        const camposCaracteristica = document.querySelectorAll('.campoCaracteristica');
-        const caracteristicasAgrupadas = {};
-
-        camposCaracteristica.forEach((campo, index) => {
-            const nombreInput = `caracteristicas[${index}][nombre]`;
-            const valorInput = `caracteristicas[${index}][valor]`;
-            const inputNombre = campo.querySelector(`input[name="${nombreInput}"]`);
-            const inputValor = campo.querySelector(`input[name="${valorInput}"]`);
-
-            if (inputNombre && inputValor) {
-                const nombre = inputNombre.value;
-                const valor = inputValor.value;
-
-                if (!caracteristicasAgrupadas[nombre]) {
-                    caracteristicasAgrupadas[nombre] = [];
-                }
-
-                caracteristicasAgrupadas[nombre].push(valor);
-            }
-        });
-
-        for (const nombreCaracteristica in caracteristicasAgrupadas) {
-            opciones += `<optgroup label="${nombreCaracteristica}">`;
-
-            caracteristicasAgrupadas[nombreCaracteristica].forEach(valorCaracteristica => {
-                opciones += `<option value="${valorCaracteristica}">${valorCaracteristica}</option>`;
-            });
-
-            opciones += `</optgroup>`;
-        }
-
-        // Filtrar las opciones según el número de característica
-        opciones = opciones.replace(new RegExp(`(disabled selected>Seleccionar característica ${numCaracteristica})`), `$1</option>`);
-
-        return opciones;
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        // Agrega un evento 'change' al contenedor de combinaciones
-        const contenedorCombinaciones = document.getElementById('contenedorCombinaciones');
-        contenedorCombinaciones.addEventListener('change', function(event) {
-            if (event.target && event.target.name && event.target.name.endsWith('[stock]')) {
-                // Si el evento proviene de un campo de entrada de stock, actualiza el stock general
-                actualizarStockGeneral();
-            }
-        });
-    });
-
-
-    function mostrarInputStockGeneral() {
-        const contenedorStockGeneral = document.getElementById('contenedorStockGeneral');
-        contenedorStockGeneral.style.display = 'block';
-
-        // Ocultar el botón "Agregar stock general" después de mostrar el input
-        const botonAgregarStockGeneral = document.getElementById('agregarStockGeneral');
-        botonAgregarStockGeneral.style.display = 'none';
-    }
-
-    function actualizarStockGeneral() {
-        const stockCombinaciones = document.querySelectorAll('input[name^="combinaciones["][name$="[stock]"]');
-        let stockTotal = 0;
-
-        stockCombinaciones.forEach(inputStock => {
-            const stock = parseInt(inputStock.value);
-            if (!isNaN(stock)) {
-                stockTotal += stock;
-            }
-        });
-
-        // Actualizar el campo de stock general
-        const inputStockGeneral = document.getElementById('stockGeneral');
-        inputStockGeneral.value = stockTotal;
-        console.log(stockCombinaciones);
-        console.log(stockTotal);
-    }
 </script>
 </html>

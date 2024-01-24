@@ -168,7 +168,7 @@ body {
     }
 
     .productos-list {
-      width: 80%;
+      width: 95%;
       grid-template-columns: repeat(2, 1fr);
       grid-template-rows: repeat(2, 1fr);
     }
@@ -178,7 +178,7 @@ body {
     }
     
     .productos {
-      width: auto;
+      width: 100%;
       height: max-content;
       display: flex;
       justify-content: center;

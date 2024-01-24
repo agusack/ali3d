@@ -78,11 +78,6 @@ if ($producto["imagen4"]) {
                         <?php 
                             echo "<h1>".$producto['nombre']."</h1>";
                             echo "<h3 class='precio'>Precio: $".$producto['precio']."</h3>";
-                            // Si no hay ninguna opción para mostrar, mostrar un mensaje indicando que no hay stock
-                            if (empty($opciones) && ($producto['stock'] < 1)) {
-                            echo "<p>Lo siento, este producto no está disponible en este momento.</P>";
-                            }
-                            else {
                             // Mostrar los inputs y opciones
                             foreach ($opciones as $atributo => $valores) {
                               echo "<div class='form-group'>";
@@ -117,7 +112,6 @@ if ($producto["imagen4"]) {
                                 echo "</svg>";
                                 echo "Agregar al carrito</div></a>";
                                 echo "<div id='stock'></div>";
-                            }
                             echo "<p>Descripción: ".$producto['descripcion']."</p>";
                         ?>
                     </div>
@@ -129,126 +123,41 @@ if ($producto["imagen4"]) {
 <script>
     $(document).ready(function() {
 
-      // Función para realizar la solicitud AJAX y obtener el stock disponible
-      function obtenerStockDisponible(combinacion_seleccionada) {
-        $.ajax({
-          url: 'consultar_stock.php',
-          method: 'POST',
-          data: {
-              producto_id: <?php echo $producto['id']; ?>,
-              combinacion_seleccionada: combinacion_seleccionada
-            },
-          dataType: 'json',
-          success: function(response) {
-            var stock_disponible = response.stock_disponible !== undefined ? response.stock_disponible : 0;
-            console.log("Stock disponible:", stock_disponible);
-            var info_stock = $('#stock');
-                      info_stock.html('<p>Tenemos en stock: ' + stock_disponible + '</p>');
-                      info_stock.css({
-                        'display': 'flex',
-                        'justify-content': 'center',
-                        'align-items': 'center'
-                      })
-            if (stock_disponible > 0) {
-                var boton = $('.card-button');
-                boton.css({
-                  'background-color': '#0090E8',
-                  'color': '#FFFFFF',
-                  'cursor': 'pointer',
-                  'pointer-events': 'visible'
-                });
-                // Evento de clic en el botón "Agregar al carrito"
-                $('#agregar-carrito-btn').click(function(e) {
-                  e.preventDefault(); // Evita que el enlace recargue la página
+      // Evento de clic en el botón "Agregar al carrito"
+      $('#agregar-carrito-btn').click(function(e) {
+        e.preventDefault(); // Evita que el enlace recargue la página
 
-                  // Obtener la cantidad solicitada por el usuario
-                  var cantidadSolicitada = parseInt($('.quantity-input').val());
+        // Obtener la cantidad solicitada por el usuario
+        var cantidadSolicitada = parseInt($('.quantity-input').val());
 
-                  // Obtener las características seleccionadas por el usuario del formulario
-                  var caracteristicas_elegidas = {};
-                  $('.form-group select').each(function() {
-                    var atributo = $(this).attr('id');
-                    var valor = $(this).val();
-                    if (valor) {
-                      caracteristicas_elegidas[atributo] = valor;
-                    }
-                  });
-
-                  // Armar la combinación seleccionada por el usuario
-                  var combinacion_seleccionada = Object.values(caracteristicas_elegidas).join(' - ');
-
-                  // Realizar la petición AJAX para verificar el stock
-                  $.ajax({
-                    url: 'verificar_stock.php', // Archivo PHP que realizará la verificación de stock
-                    method: 'POST',
-                    data: {
-                      producto_id: <?php echo $producto['id']; ?>,
-                      combinacion_unica: combinacion_seleccionada
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                      if (cantidadSolicitada <= response.stock_disponible) {
-                        // Aquí puedes agregar el código para agregar el producto al carrito de compras
-                        // Construir la URL para agregar el producto al carrito
-                        var idProducto = <?php echo $producto['id']; ?>;
-                        var nombreProducto = "<?php echo $producto['nombre']; ?>";
-                        var precioProducto = "<?php echo $producto['precio']; ?>";
-                        var rutaImagen = "<?php echo $producto['imagen']; ?>";
-                        var cantidad = cantidadSolicitada;
-                        var caracteristicasQuery = '';
-                        for (var atributo in caracteristicas_elegidas) {
-                          caracteristicasQuery += `&caracteristica_${encodeURIComponent(atributo)}=${encodeURIComponent(caracteristicas_elegidas[atributo])}`;
-                        }
-                        var url = `?id=${idProducto}&agregar=${idProducto}&nombre=${encodeURIComponent(nombreProducto)}&precio=${precioProducto}&ruta_imagen=${encodeURIComponent(rutaImagen)}&cantidad=${cantidad}${caracteristicasQuery}`;
-
-                        $.ajax({
-                          url: 'modificar_stock.php',
-                          method: 'POST',
-                          data: {
-                            producto_id: <?php echo $producto['id']; ?>,
-                            combinacion_unica: combinacion_seleccionada,
-                            cantidad: cantidadSolicitada
-                          },
-                          dataType: 'json',
-                          success: function(response) {
-                            console.log('Stock modificado en la base de datos:', response);
-                          },
-                          error: function() {
-                            console.log('Error al modificar el stock en la base de datos.');
-                          }
-                        });
-
-                        // Redirigir al usuario a la URL para agregar el producto al carrito
-                        window.location.href = url;
-                        console.log("agregado al carrito");
-                      } else {
-                        alert('Lo sentimos, no hay suficiente stock disponible. Tenemos en stock: ' + response.stock_disponible);
-                      }
-                    },
-                    error: function() {
-                      alert('Ha ocurrido un error al verificar el stock.');
-                    }
-                  });
-                  console.log(combinacion_seleccionada);
-                });
-            } else {
-              console.log('no funciona boton');
-                var boton = $('.card-button');
-                // Cambia el estilo del botón
-                boton.css({
-                  'background-color': '#ccc',
-                  'color': '#888',
-                  'cursor': 'not-allowed',
-                  'pointer-events': 'none'
-                });
-            }
-          },
-          error: function(xhr, status, error) {
-            console.error("Error al obtener el stock:", error);
-            // Manejar el error en caso de que la solicitud falle.
+        // Obtener las características seleccionadas por el usuario del formulario
+        var caracteristicas_elegidas = {};
+        $('.form-group select').each(function() {
+          var atributo = $(this).attr('id');
+          var valor = $(this).val();
+          if (valor) {
+            caracteristicas_elegidas[atributo] = valor;
           }
         });
-      }
+
+        // Armar la combinación seleccionada por el usuario
+        var combinacion_seleccionada = Object.values(caracteristicas_elegidas).join(' - ');
+
+        var idProducto = <?php echo $producto['id']; ?>;
+        var nombreProducto = "<?php echo $producto['nombre']; ?>";
+        var precioProducto = "<?php echo $producto['precio']; ?>";
+        var rutaImagen = "<?php echo $producto['imagen']; ?>";
+        var cantidad = cantidadSolicitada;
+        var caracteristicasQuery = '';
+        for (var atributo in caracteristicas_elegidas) {
+          caracteristicasQuery += `&caracteristica_${encodeURIComponent(atributo)}=${encodeURIComponent(caracteristicas_elegidas[atributo])}`;
+        }
+        var url = `?id=${idProducto}&agregar=${idProducto}&nombre=${encodeURIComponent(nombreProducto)}&precio=${precioProducto}&ruta_imagen=${encodeURIComponent(rutaImagen)}&cantidad=${cantidad}${caracteristicasQuery}`;
+
+        // Redirigir al usuario a la URL para agregar el producto al carrito
+        window.location.href = url;
+        console.log("agregado al carrito");
+      });
 
       var caracteristicas_elegidas = {};
       // Función para actualizar la combinación seleccionada
@@ -269,7 +178,6 @@ if ($producto["imagen4"]) {
           delete caracteristicas_elegidas[atributo];
         }
         var combinacion_seleccionada = actualizarCombinacionSeleccionada();
-        obtenerStockDisponible(combinacion_seleccionada); // Llamar a la función para obtener el stock después de cada cambio
       }
 
       // Agregar el evento 'change' a los selects con la clase 'form-group' (igual que antes)
@@ -294,33 +202,33 @@ if ($producto["imagen4"]) {
         }
       });
 
-              // Verificar si la notificación está presente en la sesión
-              const sessionNotification = "<?php echo isset($_SESSION['notificacion']) ? $_SESSION['notificacion'] : '' ?>";
-        if (sessionNotification !== "") {
-            // Esperar a que el contenido de la página se haya cargado completamente
-            document.addEventListener("DOMContentLoaded", function() {
-            // Obtener la referencia al elemento de notificación
-            const notification = document.querySelector(".notification");
+      // Verificar si la notificación está presente en la sesión
+      const sessionNotification = "<?php echo isset($_SESSION['notificacion']) ? $_SESSION['notificacion'] : '' ?>";
+      if (sessionNotification !== "") {
+        // Esperar a que el contenido de la página se haya cargado completamente
+        document.addEventListener("DOMContentLoaded", function() {
+          // Obtener la referencia al elemento de notificación
+          const notification = document.querySelector(".notification");
 
-            // Mostrar la notificación después de 1 segundo
-            setTimeout(function() {
-                notification.style.display = "block";
-            }, 1000);
+          // Mostrar la notificación después de 1 segundo
+          setTimeout(function() {
+            notification.style.display = "block";
+          }, 1000);
 
-            // Ocultar la notificación después de 5 segundos
-            setTimeout(function() {
-                notification.style.display = "none";
-                // Llamar a un archivo PHP para borrar la variable de sesión
-                $.ajax({
-                    url: "eliminar_notificacion.php",
-                    type: "POST",
-                    success: function(response) {
-                        console.log("Notificación borrada");
-                    }
-                });
-            }, 5000);
-            });
-        }
+          // Ocultar la notificación después de 5 segundos
+          setTimeout(function() {
+              notification.style.display = "none";
+              // Llamar a un archivo PHP para borrar la variable de sesión
+              $.ajax({
+                url: "eliminar_notificacion.php",
+                type: "POST",
+                success: function(response) {
+                  console.log("Notificación borrada");
+                }
+              });
+          }, 5000);
+        });
+      }
 </script>
 </body>
 </html>

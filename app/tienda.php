@@ -28,19 +28,6 @@ require('funciones.php');
   <button id="toggle-menu">☰</button>
     <div id="menu" class="col-md-2">
     <div class="list-group">
-      <div id="filter">
-        <h4>FILTROS</h4>
-        <form onsubmit="return false;">
-          <div>
-            <label for="is_3d_1">Filtrar por 3D</label>
-            <input type="checkbox" name="is_3d_1" id="is_3d_1" <?php echo (isset($_GET['is_3d']) && $_GET['is_3d'] === '1') ? 'checked' : ''; ?> onclick="actualizarFiltro3D('1');">
-          </div>
-          <div>
-            <label for="is_3d_0">Filtrar por Sticker</label>
-            <input type="checkbox" name="is_3d_2" id="is_3d_2" <?php echo (isset($_GET['is_3d']) && $_GET['is_3d'] === '0') ? 'checked' : ''; ?> onclick="actualizarFiltro3D('2');">
-          </div>
-        </form>
-      </div>
       <h4>CATEGORÍAS</h4>
       <?php
         // Obtener el valor de is_3d, si se especifica en la URL

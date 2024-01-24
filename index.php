@@ -62,7 +62,7 @@
   <section id="conteiner_index">
   <!-- Sección de productos 3D -->
   <div class="popular-products">
-    <h2>Productos 3D</h2>
+    <h2>Impresión 3D</h2>
     <div class="productos-list">
       <?php
       $query = "SELECT * FROM `productos` WHERE `is_3d` = '1' LIMIT 6";

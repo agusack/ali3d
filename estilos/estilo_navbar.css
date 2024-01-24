@@ -191,7 +191,7 @@ button {
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: var(--azul_2);
-  z-index: 20;
+  z-index: 202;
 }
 
 .menu-categorias ul {
@@ -303,6 +303,7 @@ button {
 
   #subnav > div > a {
     font-size: 1.1rem;
+    width: max-content;
   }
 
   #conteiner_buscador {
@@ -322,7 +323,9 @@ button {
   }
 
   .menu-categorias {
-    width: 25rem;
+    width: max-content;
+    left: -70%;
+    z-index: 300;
   }
 
   .menu-categorias li {

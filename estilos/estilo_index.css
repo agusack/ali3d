@@ -235,7 +235,7 @@ body {
     width: 100%;
     height: auto;
     background-color: var(--azul_2);
-    padding: 0rem 2rem 0rem 2rem;
+    padding: 0rem 0rem 0rem 0rem;
   }
 
   #seccion_contacto div {
@@ -247,7 +247,7 @@ body {
     height: 40rem;
   }
 
-  #seccion_contacto div p, #seccion_sticker div p, #seccion_3d div p   {
+  #seccion_contacto div p, #seccion_sticker div p, #seccion_3d div p, #papeleria div p {
     font-size: 3rem;
   }
 
@@ -275,9 +275,17 @@ body {
     }
 
     .productos-list {
-      padding: 2rem 5rem 2rem 5rem;
+      padding: 2rem 1rem 2rem 1rem;
       grid-template-columns: repeat(2, 1fr); /* Mostrar 5 productos en escritorio */
       grid-gap: 0.5rem;
+    }
+
+    #papeleria {
+      padding: 0rem 2rem 0rem 2rem;
+    }
+    
+    #papeleria div a {
+      width: 100%;
     }
 
 }

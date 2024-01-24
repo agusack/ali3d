@@ -30,44 +30,6 @@ if (isset($_GET['id_pedido'], $_GET['estado'])) {
             // Obtener el JSON de productos
             $productosJSON = json_decode($rowPedido['productos'], true);
 
-            if ($productosJSON) {
-                foreach ($productosJSON as $producto) {
-                    // Obtener el id del producto y la combinación única
-                    $idProductoConCombinacion = $producto['id_producto'];
-                    $parts = explode('_', $idProductoConCombinacion);
-                    $idProducto = $parts[0]; // El primer elemento es el ID del producto
-                    $combinacionUnica = str_replace('_', ' - ', implode('_', array_slice($parts, 1))); // Reemplazar guiones bajos con " - "
-
-                    $cantidad = $producto['cantidad'];
-
-                    // Restaurar el stock en la tabla "productos"
-                    $queryUpdateStockProducto = "UPDATE productos SET stock = stock + ? WHERE id = ?";
-                    $stmtUpdateStockProducto = mysqli_prepare($conexion, $queryUpdateStockProducto);
-                    mysqli_stmt_bind_param($stmtUpdateStockProducto, "is", $cantidad, $idProducto);
-
-                    if (mysqli_stmt_execute($stmtUpdateStockProducto)) {
-                        // Stock de producto actualizado correctamente
-                    } else {
-                        echo "Error al actualizar el stock de producto: " . mysqli_error($conexion);
-                    }
-
-                    // Restaurar el stock en la tabla "combinaciones_producto"
-                    $queryUpdateStockCombinacion = "UPDATE combinaciones_producto SET stock = stock + ? WHERE id_producto = ? AND combinacion_unica = ?";
-                    $stmtUpdateStockCombinacion = mysqli_prepare($conexion, $queryUpdateStockCombinacion);
-                    mysqli_stmt_bind_param($stmtUpdateStockCombinacion, "iss", $cantidad, $idProducto, $combinacionUnica);
-
-                    if (mysqli_stmt_execute($stmtUpdateStockCombinacion)) {
-                        // Stock de combinación única actualizado correctamente
-                    } else {
-                        echo "Error al actualizar el stock de combinación única: " . mysqli_error($conexion);
-                    }
-
-                    // Cerrar las consultas preparadas
-                    mysqli_stmt_close($stmtUpdateStockProducto);
-                    mysqli_stmt_close($stmtUpdateStockCombinacion);
-                }
-            }
-
             // Insertar datos en la tabla "ventas"
             $queryInsertVenta = "INSERT INTO ventas (id_usuario, nombre_usuario, correo_usuario, fecha_venta, total, estado, entrega, productos) 
                                 VALUES (?, ?, ?, NOW(), ?, ?, ?, ?)";

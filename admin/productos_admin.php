@@ -36,7 +36,6 @@ session_start();
                         <th>Imagen</th>
                         <th>Nombre</th>
                         <th>Precio</th>
-                        <th>Stock</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -46,7 +45,6 @@ session_start();
                             <td><img src="<?php echo $producto['imagen'] ?>" alt="" style="height: 50px; width: 50px;" ></td>
                             <td><?php echo $producto['nombre'] ?></td>
                             <td><?php echo $producto['precio'] ?></td>
-                            <td><?php echo $producto['stock'] ?></td>
                             <td>
                                 <a href="editar_producto.php?id=<?php echo $producto['id'] ?>">Editar</a>
                                 <a href="eliminar_producto.php?id=<?php echo $producto['id'] ?>">Eliminar</a>

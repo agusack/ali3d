@@ -116,13 +116,6 @@
             <label for="celularTransferencia">Nro de celular:</label>
             <input type="number" id="celularTransferencia" name="celularTransferencia" autocomplete="off"><br>
           </div>
-          <input type="radio" name="paymentMethod" value="debito_credito" onclick="showPaymentForm('tarjetaFormContainer')"> Debito/Crédito<br>
-          <div id="tarjetaFormContainer" style="display: none;">
-            <h2>¡Terminaremos la compra por Whatsapp!</h2>
-            <p>Te enviaremos un link para que puedas abonar. Por favor, déjanos tu número</p>
-            <label for="celularTarjeta">Nro de celular:</label>
-            <input type="number" id="celularTarjeta" name="celularTarjeta" autocomplete="off"><br>
-          </div>
           <button type="submit">Continuar</button>
         </form>
       </div>
@@ -222,7 +215,6 @@ function showPaymentForm(formId) {
   // Oculta todos los formularios de método de pago
   document.getElementById('efectivoFormContainer').style.display = 'none';
   document.getElementById('cbuFormContainer').style.display = 'none';
-  document.getElementById('tarjetaFormContainer').style.display = 'none';
 
   // Muestra el formulario de método de pago seleccionado
   document.getElementById(formId).style.display = 'block';

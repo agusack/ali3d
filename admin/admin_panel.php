@@ -35,8 +35,9 @@
 
     // variables para contar los productos
     $total_productos = 0;
-    $productos_agotados = 0;
-    $productos_bajo_stock = 0;
+    $productos_3d = 0;
+    $productos_sticker = 0;
+    $productos_papel = 0;
 
     // procesar el resultado de la consulta SQL
     if (mysqli_num_rows($result) > 0) {
@@ -45,11 +46,13 @@
 
         // contar el número de productos agotados y con bajo stock
         while ($row = mysqli_fetch_assoc($result)) {
-            if ($row['stock'] == 0) {
-                $productos_agotados++;
-            } else if ($row['stock'] <= 10) {
-                $productos_bajo_stock++;
-            }
+            if ($row['is_3d'] == 1) {
+                $productos_3d++;
+            } else if ($row['is_3d'] == 2) {
+                $productos_sticker++;
+            } else if ($row['is_3d'] == 3) {
+              $productos_papel++;
+          }
         }
     }
 
@@ -150,9 +153,10 @@
                       <i class="fas fa-boxes fa-3x"></i>
                     </div>
                     <div class="media-content">
-                      <p class="subtitulo">Inventario: <?php echo $total_productos; ?></p>
-                      <p>Productos agotados: <?php echo $productos_agotados; ?></p>
-                      <p>Productos con bajo stock: <?php echo $productos_bajo_stock; ?></p>
+                      <p class="subtitulo">Total de productos: <?php echo $total_productos; ?></p>
+                      <p>Productos 3D: <?php echo $productos_3d; ?></p>
+                      <p>Productos Sticker: <?php echo $productos_sticker; ?></p>
+                      <p>Productos Papelería: <?php echo $productos_papel; ?></p>
                     </div>
                   </div>
                 </div>
