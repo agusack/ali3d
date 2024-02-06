@@ -261,6 +261,37 @@ $resultado_subcategorias_papel = $conexion->query($sql_subcategorias_papel);
                     </div>
                 </div>
 
+                <!-- Sección para mostrar tags seleccionados -->
+                <div id="tags-seleccionados">
+                <!-- Tags seleccionados se mostrarán aquí dinámicamente -->
+                </div>
+
+                <label for="tags-existentes">Tags existentes:</label>
+                <select id="tags-existentes" multiple>  
+                    <?php
+                    // Consulta para obtener la lista de tags existentes
+                    $sql_tags = "SELECT id_tag, nombre_tag FROM tags";
+                    $stmt_tags = $conexion->prepare($sql_tags);
+                    $stmt_tags->execute();
+                    $tags = $stmt_tags->fetchAll(PDO::FETCH_ASSOC);
+
+                    // Mostrar opciones de tags existentes en el formulario
+                    foreach ($tags as $tag) {
+                        echo "<option value='{$tag['id_tag']}'>{$tag['nombre_tag']}</option>";
+                    }
+                    ?>
+                </select><br>
+
+                <!-- Botón para agregar tag existente -->
+                <button type="button" onclick="agregarTagExistente()">Agregar Tag Existente</button>
+
+
+                <!-- Campo para agregar nuevo tag -->
+                <label for="nuevo-tag">Nuevo Tag:</label>
+                <input type="text" id="nuevo-tag">
+                <button type="button" onclick="agregarNuevoTag()">Agregar Nuevo Tag</button>
+
+
                 <input type="submit" value="Añadir" style="margin-top: 20px;">
             </form>
         </div>
@@ -314,6 +345,92 @@ $resultado_subcategorias_papel = $conexion->query($sql_subcategorias_papel);
         const campo = el.parentNode;
         campo.parentNode.removeChild(campo);
     }
+
+    // Arreglo para almacenar objetos de tags seleccionados (conteniendo id y nombre)
+    var tagsSeleccionados = [];
+
+    // Función para agregar tag existente
+    function agregarTagExistente() {
+    var selectTags = document.getElementById('tags-existentes');
+    var selectedTags = Array.from(selectTags.selectedOptions).map(option => {
+        return {
+        id: option.value,
+        nombre: option.text
+        };
+    });
+
+    // Agregar los objetos de tags seleccionados al arreglo y mostrarlos en la interfaz
+    tagsSeleccionados = tagsSeleccionados.concat(selectedTags);
+    actualizarTagsSeleccionados();
+    }
+
+    // Función para agregar nuevo tag
+    async function agregarNuevoTag() {
+  var nuevoTagNombre = document.getElementById('nuevo-tag').value.trim();
+
+  // Verificar que el tag no esté vacío y no exista en los tags seleccionados
+  if (nuevoTagNombre !== '' && !tagsSeleccionados.some(tag => tag.nombre === nuevoTagNombre)) {
+    // Supongamos que agregamos el nuevo tag a la base de datos y obtenemos su ID
+    var nuevoTagId = await agregarTagALaBaseDeDatos(nuevoTagNombre);
+
+    // Agregar el objeto del nuevo tag al arreglo y mostrarlo en la interfaz
+    tagsSeleccionados.push({
+      id: nuevoTagId,
+      nombre: nuevoTagNombre
+    });
+    actualizarTagsSeleccionados();
+
+    // Limpiar el campo de nuevo tag
+    document.getElementById('nuevo-tag').value = '';
+  }
+}
+
+// Función para agregar un nuevo tag a la base de datos
+async function agregarTagALaBaseDeDatos(nombreTag) {
+  // Aquí deberías hacer una solicitud al servidor para agregar el nuevo tag a la base de datos
+  // y obtener el ID del nuevo tag después de insertarlo
+  // Supongamos que haces una solicitud asíncrona utilizando fetch o axios
+  try {
+    const response = await fetch('cargar_tag.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ nombre: nombreTag })
+    });
+    const data = await response.json();
+    // Suponiendo que el servidor devuelve el ID del nuevo tag en la respuesta
+    return data.id;
+  } catch (error) {
+    console.error('Error al agregar el nuevo tag:', error);
+    // Manejar el error de alguna manera apropiada
+    return null;
+  }
+}
+
+    // Función para eliminar tag seleccionado
+    function eliminarTag(idTemporal) {
+    // Filtrar el arreglo para excluir el tag seleccionado por su ID temporal
+    tagsSeleccionados = tagsSeleccionados.filter(tag => tag.idTemporal !== idTemporal);
+    actualizarTagsSeleccionados();
+    }
+
+    // Función para actualizar la visualización de los tags seleccionados
+    function actualizarTagsSeleccionados() {
+    var tagsContainer = document.getElementById('tags-seleccionados');
+
+    // Limpiar el contenedor antes de volver a mostrar los tags
+    tagsContainer.innerHTML = '';
+
+    // Mostrar cada tag con un botón para eliminarlo
+    tagsSeleccionados.forEach(tag => {
+        var tagElement = document.createElement('div');
+        tagElement.innerHTML = `${tag.nombre} <button type="button" onclick="eliminarTag('${tag.idTemporal}')">Eliminar</button>`;
+        tagsContainer.appendChild(tagElement);
+    });
+    }
+
+
 
 </script>
 </html>
